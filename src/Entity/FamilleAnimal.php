@@ -29,6 +29,9 @@ class FamilleAnimal
     #[ORM\Column(length: 128)]
     private ?string $typeAlimentation = null;
 
+    #[ORM\ManyToOne(inversedBy: 'familleAnimals')]
+    private ?ZoneParc $zoneParc = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -90,6 +93,18 @@ class FamilleAnimal
     public function setTypeAlimentation(string $typeAlimentation): static
     {
         $this->typeAlimentation = $typeAlimentation;
+
+        return $this;
+    }
+
+    public function getZoneParc(): ?ZoneParc
+    {
+        return $this->zoneParc;
+    }
+
+    public function setZoneParc(?ZoneParc $zoneParc): static
+    {
+        $this->zoneParc = $zoneParc;
 
         return $this;
     }
