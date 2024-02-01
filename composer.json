@@ -71,10 +71,6 @@
             "Composer\\Config::disableProcessTimeout",
             "symfony serve"
         ],
-        "watch": [
-            "Composer\\Config::disableProcessTimeout",
-            "npm run watch"
-        ],
         "db": [
             "php bin/console doctrine:database:drop --force --if-exists",
             "php bin/console doctrine:database:create",
