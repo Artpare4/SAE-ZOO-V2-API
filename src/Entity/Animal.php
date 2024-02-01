@@ -2,11 +2,13 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiResource;
 use App\Repository\AnimalRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: AnimalRepository::class)]
+#[ApiResource]
 class Animal
 {
     #[ORM\Id]
@@ -30,7 +32,7 @@ class Animal
     private ?float $poids = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
-    private ?string $caractÃeristique = null;
+    private ?string $caractï¿½eristique = null;
 
     #[ORM\ManyToOne(inversedBy: 'animals')]
     private ?FamilleAnimal $familleAnimal = null;
@@ -100,14 +102,14 @@ class Animal
         return $this;
     }
 
-    public function getCaractÃeristique(): ?string
+    public function getCaractï¿½eristique(): ?string
     {
-        return $this->caractÃeristique;
+        return $this->caractï¿½eristique;
     }
 
-    public function setCaractÃeristique(?string $caractÃeristique): static
+    public function setCaractï¿½eristique(?string $caractï¿½eristique): static
     {
-        $this->caractÃeristique = $caractÃeristique;
+        $this->caractï¿½eristique = $caractï¿½eristique;
 
         return $this;
     }
