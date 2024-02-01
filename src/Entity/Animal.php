@@ -32,6 +32,9 @@ class Animal
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $caractÃeristique = null;
 
+    #[ORM\ManyToOne(inversedBy: 'animals')]
+    private ?FamilleAnimal $familleAnimal = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -105,6 +108,18 @@ class Animal
     public function setCaractÃeristique(?string $caractÃeristique): static
     {
         $this->caractÃeristique = $caractÃeristique;
+
+        return $this;
+    }
+
+    public function getFamilleAnimal(): ?FamilleAnimal
+    {
+        return $this->familleAnimal;
+    }
+
+    public function setFamilleAnimal(?FamilleAnimal $familleAnimal): static
+    {
+        $this->familleAnimal = $familleAnimal;
 
         return $this;
     }
