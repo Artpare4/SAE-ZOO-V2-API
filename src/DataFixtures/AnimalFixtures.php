@@ -29,7 +29,7 @@ class AnimalFixtures extends Fixture implements DependentFixtureInterface
     public function getDependencies()
     {
         return[
-            FamilleAnimalFactory::class
+            FamilleAnimalFixtures::class
         ];
     }
 }

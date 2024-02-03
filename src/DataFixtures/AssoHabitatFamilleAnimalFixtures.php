@@ -19,7 +19,7 @@ class AssoHabitatFamilleAnimalFixtures extends Fixture implements DependentFixtu
         $association = AssoHabitatFamilleAnimalFactory::createMany(25, function () {
             return [
                 'habitat' => HabitatFactory::random(),
-                'familleAnimal' => FamilleAnimalFactory::random(),
+                'familleAnimal' => FamilleAnimalFactory::random()
             ];
         });
         foreach ($association as $asso) {
@@ -33,7 +33,7 @@ class AssoHabitatFamilleAnimalFixtures extends Fixture implements DependentFixtu
     {
         return[
             HabitatFixtures::class,
-            FamilleAnimalFactory::class
+            FamilleAnimalFixtures::class
         ];
     }
 }
