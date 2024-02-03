@@ -13,7 +13,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: EspeceRepository::class)]
 #[ApiResource(operations: [
-    new Get(normalizationContext: ['groups' => ['get']]),
+    new Get(normalizationContext: ['groups' => ['get']],openapi: false),
 ])]
 class Espece
 {
