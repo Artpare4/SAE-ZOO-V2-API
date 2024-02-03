@@ -47,7 +47,7 @@ final class ZoneParcFactory extends ModelFactory
     protected function getDefaults(): array
     {
         return [
-            'libZone' => self::faker()->text(128),
+            'libZone' => self::faker()->word(),
         ];
     }
 
