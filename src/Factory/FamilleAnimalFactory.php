@@ -52,7 +52,7 @@ final class FamilleAnimalFactory extends ModelFactory
         return [
             'dangerExtinction' => self::faker()->numberBetween(0, 5),
             'description' => self::faker()->text(511),
-            'nomFamilleAnimal' => self::faker()->randomNumber($Animal),
+            'nomFamilleAnimal' => self::faker()->randomElement($Animal),
             'nomScientifique' => self::faker()->words(2, true),
             'typeAlimentation' => self::faker()->randomElement($nourriture),
         ];
