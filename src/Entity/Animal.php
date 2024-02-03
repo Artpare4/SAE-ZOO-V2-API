@@ -31,11 +31,11 @@ class Animal
     #[ORM\Column]
     private ?float $poids = null;
 
-    #[ORM\Column(type: Types::TEXT, nullable: true)]
-    private ?string $caract�eristique = null;
-
     #[ORM\ManyToOne(inversedBy: 'animals')]
     private ?FamilleAnimal $familleAnimal = null;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $caracteristique = null;
 
     public function getId(): ?int
     {
@@ -102,18 +102,6 @@ class Animal
         return $this;
     }
 
-    public function getCaract�eristique(): ?string
-    {
-        return $this->caract�eristique;
-    }
-
-    public function setCaract�eristique(?string $caract�eristique): static
-    {
-        $this->caract�eristique = $caract�eristique;
-
-        return $this;
-    }
-
     public function getFamilleAnimal(): ?FamilleAnimal
     {
         return $this->familleAnimal;
@@ -122,6 +110,18 @@ class Animal
     public function setFamilleAnimal(?FamilleAnimal $familleAnimal): static
     {
         $this->familleAnimal = $familleAnimal;
+
+        return $this;
+    }
+
+    public function getCaracteristique(): ?string
+    {
+        return $this->caracteristique;
+    }
+
+    public function setCaracteristique(?string $caracteristique): static
+    {
+        $this->caracteristique = $caracteristique;
 
         return $this;
     }
