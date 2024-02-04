@@ -23,6 +23,10 @@ class Reservation
     #[ORM\Column]
     private ?int $nbPlacesEnfant = null;
 
+    #[ORM\ManyToOne(inversedBy: 'reservations')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Billet $billet = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -60,6 +64,18 @@ class Reservation
     public function setNbPlacesEnfant(int $nbPlacesEnfant): static
     {
         $this->nbPlacesEnfant = $nbPlacesEnfant;
+
+        return $this;
+    }
+
+    public function getBillet(): ?Billet
+    {
+        return $this->billet;
+    }
+
+    public function setBillet(?Billet $billet): static
+    {
+        $this->billet = $billet;
 
         return $this;
     }
