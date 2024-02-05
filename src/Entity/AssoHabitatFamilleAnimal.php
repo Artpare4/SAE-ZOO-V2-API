@@ -2,10 +2,16 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Get;
 use App\Repository\AssoHabitatFamilleAnimalRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: AssoHabitatFamilleAnimalRepository::class)]
+#[ApiResource(operations: [
+    new Get(normalizationContext: ['groups' => ['get']], openapi: false),
+])]
 class AssoHabitatFamilleAnimal
 {
     #[ORM\Id]
@@ -15,6 +21,7 @@ class AssoHabitatFamilleAnimal
 
     #[ORM\ManyToOne(inversedBy: 'assoHabitatFamilleAnimals')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['get'])]
     private ?Habitat $habitat = null;
 
     #[ORM\ManyToOne(inversedBy: 'assoHabitatFamilleAnimals')]
