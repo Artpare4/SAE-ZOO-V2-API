@@ -17,7 +17,7 @@ class DateEvent
     private ?int $id = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $date = null;
+    private ?\DateTimeInterface $dateEvent = null;
 
     #[ORM\OneToMany(mappedBy: 'dateEvent', targetEntity: AssoEventDateEvent::class)]
     private Collection $events;
@@ -32,14 +32,14 @@ class DateEvent
         return $this->id;
     }
 
-    public function getDate(): ?\DateTimeInterface
+    public function getDateEvent(): ?\DateTimeInterface
     {
-        return $this->date;
+        return $this->dateEvent;
     }
 
-    public function setDate(\DateTimeInterface $date): static
+    public function setDateEvent(\DateTimeInterface $dateEvent): static
     {
-        $this->date = $date;
+        $this->dateEvent = $dateEvent;
 
         return $this;
     }

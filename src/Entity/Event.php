@@ -20,7 +20,7 @@ class Event
     private ?string $nomEvent = null;
 
     #[ORM\Column]
-    private ?int $nbPlace = null;
+    private ?int $nbPlaces = null;
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
@@ -54,14 +54,14 @@ class Event
         return $this;
     }
 
-    public function getNbPlace(): ?int
+    public function getNbPlaces(): ?int
     {
-        return $this->nbPlace;
+        return $this->nbPlaces;
     }
 
-    public function setNbPlace(int $nbPlace): static
+    public function setNbPlaces(int $nbPlaces): static
     {
-        $this->nbPlace = $nbPlace;
+        $this->nbPlaces = $nbPlaces;
 
         return $this;
     }
