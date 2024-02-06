@@ -25,8 +25,6 @@ class AssoEventReservationFixtures extends Fixture implements DependentFixtureIn
             }
         }
         $manager->flush();
-
-        $manager->flush();
     }
 
     public function getDependencies(): array
