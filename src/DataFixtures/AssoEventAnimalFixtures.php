@@ -7,9 +7,10 @@ use App\Factory\AnimalFactory;
 use App\Factory\AssoEventAnimalFactory;
 use App\Factory\EventFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
-class AssoEventAnimalFixtures extends Fixture
+class AssoEventAnimalFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager): void
     {
