@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
 use App\Repository\AnimalRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -36,6 +38,14 @@ class Animal
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $caracteristique = null;
+
+    #[ORM\OneToMany(mappedBy: 'animal', targetEntity: AssoEventAnimal::class, orphanRemoval: true)]
+    private Collection $events;
+
+    public function __construct()
+    {
+        $this->events = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -122,6 +132,36 @@ class Animal
     public function setCaracteristique(?string $caracteristique): static
     {
         $this->caracteristique = $caracteristique;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, AssoEventAnimal>
+     */
+    public function getEvents(): Collection
+    {
+        return $this->events;
+    }
+
+    public function addEvent(AssoEventAnimal $event): static
+    {
+        if (!$this->events->contains($event)) {
+            $this->events->add($event);
+            $event->setAnimal($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEvent(AssoEventAnimal $event): static
+    {
+        if ($this->events->removeElement($event)) {
+            // set the owning side to null (unless already changed)
+            if ($event->getAnimal() === $this) {
+                $event->setAnimal(null);
+            }
+        }
 
         return $this;
     }
