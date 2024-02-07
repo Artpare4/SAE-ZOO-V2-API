@@ -31,10 +31,14 @@ class Event
     #[ORM\OneToMany(mappedBy: 'event', targetEntity: AssoEventReservation::class)]
     private Collection $reservation;
 
+    #[ORM\OneToMany(mappedBy: 'event', targetEntity: AssoEventZoneParc::class, orphanRemoval: true)]
+    private Collection $zonesParc;
+
     public function __construct()
     {
         $this->datesEvent = new ArrayCollection();
         $this->reservation = new ArrayCollection();
+        $this->zonesParc = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -132,6 +136,36 @@ class Event
             // set the owning side to null (unless already changed)
             if ($reservation->getEvent() === $this) {
                 $reservation->setEvent(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, AssoEventZoneParc>
+     */
+    public function getZonesParc(): Collection
+    {
+        return $this->zonesParc;
+    }
+
+    public function addZonesParc(AssoEventZoneParc $zonesParc): static
+    {
+        if (!$this->zonesParc->contains($zonesParc)) {
+            $this->zonesParc->add($zonesParc);
+            $zonesParc->setEvent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeZonesParc(AssoEventZoneParc $zonesParc): static
+    {
+        if ($this->zonesParc->removeElement($zonesParc)) {
+            // set the owning side to null (unless already changed)
+            if ($zonesParc->getEvent() === $this) {
+                $zonesParc->setEvent(null);
             }
         }
 
