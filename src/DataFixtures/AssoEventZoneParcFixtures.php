@@ -7,9 +7,10 @@ use App\Factory\AssoEventZoneParcFactory;
 use App\Factory\EventFactory;
 use App\Factory\ZoneParcFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
-class AssoEventZoneParcFixturesPhp extends Fixture
+class AssoEventZoneParcFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager): void
     {
