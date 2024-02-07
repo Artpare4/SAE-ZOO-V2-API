@@ -2,12 +2,10 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Metadata\ApiResource;
 use App\Repository\AssoEventAnimalRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: AssoEventAnimalRepository::class)]
-#[ApiResource]
 class AssoEventAnimal
 {
     #[ORM\Id]
