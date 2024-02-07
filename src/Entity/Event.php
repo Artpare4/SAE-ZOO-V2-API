@@ -34,11 +34,15 @@ class Event
     #[ORM\OneToMany(mappedBy: 'event', targetEntity: AssoEventZoneParc::class, orphanRemoval: true)]
     private Collection $zonesParc;
 
+    #[ORM\OneToMany(mappedBy: 'event', targetEntity: AssoEventAnimal::class, orphanRemoval: true)]
+    private Collection $animaux;
+
     public function __construct()
     {
         $this->datesEvent = new ArrayCollection();
         $this->reservation = new ArrayCollection();
         $this->zonesParc = new ArrayCollection();
+        $this->animaux = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -166,6 +170,36 @@ class Event
             // set the owning side to null (unless already changed)
             if ($zonesParc->getEvent() === $this) {
                 $zonesParc->setEvent(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, AssoEventAnimal>
+     */
+    public function getAnimaux(): Collection
+    {
+        return $this->animaux;
+    }
+
+    public function addAnimaux(AssoEventAnimal $animaux): static
+    {
+        if (!$this->animaux->contains($animaux)) {
+            $this->animaux->add($animaux);
+            $animaux->setEvent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAnimaux(AssoEventAnimal $animaux): static
+    {
+        if ($this->animaux->removeElement($animaux)) {
+            // set the owning side to null (unless already changed)
+            if ($animaux->getEvent() === $this) {
+                $animaux->setEvent(null);
             }
         }
 
