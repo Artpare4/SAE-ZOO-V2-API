@@ -19,7 +19,7 @@ class AssoEventReservation
 
     #[ORM\ManyToOne(inversedBy: 'events')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Reservation $reservations = null;
+    private ?Reservation $reservation = null;
 
     public function getId(): ?int
     {
@@ -38,14 +38,14 @@ class AssoEventReservation
         return $this;
     }
 
-    public function getReservations(): ?Reservation
+    public function getReservation(): ?Reservation
     {
-        return $this->reservations;
+        return $this->reservation;
     }
 
-    public function setReservations(?Reservation $reservations): static
+    public function setReservation(?Reservation $reservation): static
     {
-        $this->reservations = $reservations;
+        $this->reservation = $reservation;
 
         return $this;
     }

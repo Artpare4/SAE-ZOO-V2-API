@@ -19,10 +19,10 @@ class Billet
     private ?int $nbJours = null;
 
     #[ORM\Column]
-    private ?float $tarifAdulte = null;
+    private ?float $tarifAdult = null;
 
     #[ORM\Column]
-    private ?float $tarifEnfant = null;
+    private ?float $tarifChild = null;
 
     #[ORM\OneToMany(mappedBy: 'billet', targetEntity: Reservation::class)]
     private Collection $reservations;
@@ -49,26 +49,26 @@ class Billet
         return $this;
     }
 
-    public function getTarifAdulte(): ?float
+    public function getTarifAdult(): ?float
     {
-        return $this->tarifAdulte;
+        return $this->tarifAdult;
     }
 
-    public function setTarifAdulte(float $tarifAdulte): static
+    public function setTarifAdult(float $tarifAdult): static
     {
-        $this->tarifAdulte = $tarifAdulte;
+        $this->tarifAdult = $tarifAdult;
 
         return $this;
     }
 
-    public function getTarifEnfant(): ?float
+    public function getTarifChild(): ?float
     {
-        return $this->tarifEnfant;
+        return $this->tarifChild;
     }
 
-    public function setTarifEnfant(float $tarifEnfant): static
+    public function setTarifChild(float $tarifChild): static
     {
-        $this->tarifEnfant = $tarifEnfant;
+        $this->tarifChild = $tarifChild;
 
         return $this;
     }

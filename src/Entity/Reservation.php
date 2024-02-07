@@ -20,10 +20,10 @@ class Reservation
     private ?\DateTimeInterface $dateReservation = null;
 
     #[ORM\Column]
-    private ?int $nbPlacesAdulte = null;
+    private ?int $nbPlacesAdult = null;
 
     #[ORM\Column]
-    private ?int $nbPlacesEnfant = null;
+    private ?int $nbPlacesChild = null;
 
     #[ORM\ManyToOne(inversedBy: 'reservations')]
     #[ORM\JoinColumn(nullable: false)]
@@ -58,26 +58,26 @@ class Reservation
         return $this;
     }
 
-    public function getNbPlacesAdulte(): ?int
+    public function getNbPlacesAdult(): ?int
     {
-        return $this->nbPlacesAdulte;
+        return $this->nbPlacesAdult;
     }
 
-    public function setNbPlacesAdulte(int $nbPlacesAdulte): static
+    public function setNbPlacesAdult(int $nbPlacesAdult): static
     {
-        $this->nbPlacesAdulte = $nbPlacesAdulte;
+        $this->nbPlacesAdult = $nbPlacesAdult;
 
         return $this;
     }
 
-    public function getNbPlacesEnfant(): ?int
+    public function getNbPlacesChild(): ?int
     {
-        return $this->nbPlacesEnfant;
+        return $this->nbPlacesChild;
     }
 
-    public function setNbPlacesEnfant(int $nbPlacesEnfant): static
+    public function setNbPlacesChild(int $nbPlacesChild): static
     {
-        $this->nbPlacesEnfant = $nbPlacesEnfant;
+        $this->nbPlacesChild = $nbPlacesChild;
 
         return $this;
     }
