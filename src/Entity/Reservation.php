@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiResource;
 use App\Repository\ReservationRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -9,6 +10,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ReservationRepository::class)]
+#[ApiResource]
 class Reservation
 {
     #[ORM\Id]
@@ -33,7 +35,7 @@ class Reservation
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
-    #[ORM\OneToMany(mappedBy: 'reservations', targetEntity: AssoEventReservation::class)]
+    #[ORM\OneToMany(mappedBy: 'reservation', targetEntity: AssoEventReservation::class)]
     private Collection $events;
 
     public function __construct()
@@ -118,7 +120,7 @@ class Reservation
     {
         if (!$this->events->contains($event)) {
             $this->events->add($event);
-            $event->setReservations($this);
+            $event->setReservation($this);
         }
 
         return $this;
@@ -128,8 +130,8 @@ class Reservation
     {
         if ($this->events->removeElement($event)) {
             // set the owning side to null (unless already changed)
-            if ($event->getReservations() === $this) {
-                $event->setReservations(null);
+            if ($event->getReservation() === $this) {
+                $event->setReservation(null);
             }
         }
 
