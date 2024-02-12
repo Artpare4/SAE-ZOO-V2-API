@@ -32,7 +32,7 @@ use Doctrine\ORM\Mapping as ORM;
     new Post(openapiContext: [
         'summary' => 'Créé une réservation',
         'description' => 'Créé une réservation apaprtenant à un utilisateur',
-    ]),
+    ], security: "is_granted('ROLE_USER') and object.getuser()==user"),
     new Delete(
         openapiContext: [
             'summary' => 'Supprime une réservation',
