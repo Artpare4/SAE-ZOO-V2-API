@@ -15,7 +15,10 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ReservationRepository::class)]
 #[ApiResource(operations: [
-    new Get(),
+    new Get(openapiContext: [
+        'summary' => 'Retourne une réservation associé à l\'id',
+        'description' => 'Retourne une réservati on associé à l\'id',
+    ], security: "is_granted('ROLE_USER') and object.getuser()==user"),
     new GetCollection(),
     new Post(),
     new Delete(),
