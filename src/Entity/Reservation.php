@@ -6,6 +6,7 @@ use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Delete;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Link;
 use ApiPlatform\Metadata\Post;
 use App\Repository\ReservationRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -19,7 +20,15 @@ use Doctrine\ORM\Mapping as ORM;
         'summary' => 'Retourne une réservation associé à l\'id',
         'description' => 'Retourne une réservati on associé à l\'id',
     ], security: "is_granted('ROLE_USER') and object.getuser()==user"),
-    new GetCollection(),
+    new GetCollection(
+        uriTemplate: '/users/{id}/reservations',
+        uriVariables: ['id' => new Link(fromProperty: 'reservations', fromClass: User::class)],
+        openapiContext: [
+            'summary' => 'Retourne les réservation de l\'utilisateur passé en paramètre',
+            'description' => 'Retourne les réservation de l\'utilisateur passé en paramètre',
+        ],
+        security: "is_granted('ROLE_USER') and object.getuser()==user"
+    ),
     new Post(),
     new Delete(),
 ]
