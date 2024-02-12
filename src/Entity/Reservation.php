@@ -29,12 +29,14 @@ use Doctrine\ORM\Mapping as ORM;
         ],
         security: "is_granted('ROLE_USER') and object.getuser()==user"
     ),
-    new Post(),
+    new Post(openapiContext: [
+        'summary' => 'Créé une réservation',
+        'description' => 'Créé une réservation apaprtenant à un utilisateur',
+    ]),
     new Delete(
         openapiContext: [
             'summary' => 'Supprime une réservation',
             'description' => 'Supprime une réservation appartenant à un utilisateur',
-
         ],
         security: "is_granted('ROLE_USER') and object.getuser()==user"
     ),
