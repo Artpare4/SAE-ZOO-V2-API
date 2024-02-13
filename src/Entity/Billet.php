@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
 use App\Repository\BilletRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -16,6 +17,10 @@ use Symfony\Component\Serializer\Annotation\Groups;
         'summary' => 'Retourne les information du billet associé à l\'id',
         'description' => 'Retourne les information du billet associé à l\'id',
     ]),
+    new GetCollection(openapiContext: [
+        'summary' => 'Retourne une liste de billets',
+        'description' => 'Retourne une liste de billets',
+    ], paginationClientEnabled: true),
 ])]
 class Billet
 {
