@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Get;
 use App\Repository\BilletRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -10,7 +11,12 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: BilletRepository::class)]
-#[ApiResource]
+#[ApiResource(operations: [
+    new Get(openapiContext: [
+        'summary' => 'Retourne les information du billet associé à l\'id',
+        'description' => 'Retourne les information du billet associé à l\'id',
+    ]),
+])]
 class Billet
 {
     #[ORM\Id]
