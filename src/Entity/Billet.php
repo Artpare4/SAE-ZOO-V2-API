@@ -21,25 +21,25 @@ use Symfony\Component\Serializer\Annotation\Groups;
         'summary' => 'Retourne une liste de billets',
         'description' => 'Retourne une liste de billets',
     ], paginationClientEnabled: true),
-])]
+], normalizationContext: ['groups' => ['Billet_read']])]
 class Billet
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['Reservation-billet_read'])]
+    #[Groups(['Reservation-billet_read', 'Billet_read'])]
     private ?int $id = null;
 
     #[ORM\Column]
-    #[Groups(['Reservation-billet_read'])]
+    #[Groups(['Reservation-billet_read', 'Billet_read'])]
     private ?int $nbJours = null;
 
     #[ORM\Column]
-    #[Groups(['Reservation-billet_read'])]
+    #[Groups(['Reservation-billet_read', 'Billet_read'])]
     private ?float $tarifAdult = null;
 
     #[ORM\Column]
-    #[Groups(['Reservation-billet_read'])]
+    #[Groups(['Reservation-billet_read', 'Billet_read'])]
     private ?float $tarifChild = null;
 
     #[ORM\OneToMany(mappedBy: 'billet', targetEntity: Reservation::class)]
