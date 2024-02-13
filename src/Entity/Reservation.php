@@ -7,6 +7,7 @@ use ApiPlatform\Metadata\Delete;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Link;
+use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Post;
 use App\Repository\ReservationRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -40,6 +41,11 @@ use Doctrine\ORM\Mapping as ORM;
         ],
         security: "is_granted('ROLE_USER') and object.getuser()==user"
     ),
+    new Patch(openapiContext: [
+        'summary' => 'Modifie une réservation',
+        'description' => 'Modifie une réservation à partenant à un utilisateur',
+    ],
+        security: "is_granted('ROLE_USER') and object.getuser()==user"),
 ]
 )]
 class Reservation
