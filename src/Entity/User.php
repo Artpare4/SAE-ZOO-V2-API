@@ -32,7 +32,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Reservation::class)]
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Reservation::class, cascade: ['remove'], orphanRemoval: true)]
     private Collection $reservations;
 
     #[ORM\Column(length: 128)]
