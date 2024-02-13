@@ -7,6 +7,7 @@ use App\Repository\BilletRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: BilletRepository::class)]
 #[ApiResource]
@@ -15,15 +16,19 @@ class Billet
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['Reservation-billet_read'])]
     private ?int $id = null;
 
     #[ORM\Column]
+    #[Groups(['Reservation-billet_read'])]
     private ?int $nbJours = null;
 
     #[ORM\Column]
+    #[Groups(['Reservation-billet_read'])]
     private ?float $tarifAdult = null;
 
     #[ORM\Column]
+    #[Groups(['Reservation-billet_read'])]
     private ?float $tarifChild = null;
 
     #[ORM\OneToMany(mappedBy: 'billet', targetEntity: Reservation::class)]

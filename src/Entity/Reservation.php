@@ -14,13 +14,15 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: ReservationRepository::class)]
 #[ApiResource(operations: [
     new Get(openapiContext: [
         'summary' => 'Retourne une réservation associé à l\'id',
         'description' => 'Retourne une réservati on associé à l\'id',
-    ], security: "is_granted('ROLE_USER') and object.getuser()==user"),
+    ], normalizationContext: ['groups' => 'Reservation-billet_read'],
+        security: "is_granted('ROLE_USER') and object.getuser()==user"),
     new GetCollection(
         uriTemplate: '/users/{id}/reservations',
         uriVariables: ['id' => new Link(fromProperty: 'reservations', fromClass: User::class)],
@@ -28,6 +30,7 @@ use Doctrine\ORM\Mapping as ORM;
             'summary' => 'Retourne les réservation de l\'utilisateur passé en paramètre',
             'description' => 'Retourne les réservation de l\'utilisateur passé en paramètre',
         ],
+        normalizationContext: ['groups' => 'Reservation-billet_read'],
         security: "is_granted('ROLE_USER') and object.getuser()==user"
     ),
     new Post(openapiContext: [
@@ -53,26 +56,33 @@ class Reservation
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['Reservation-billet_read'])]
     private ?int $id = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Groups(['Reservation-billet_read'])]
     private ?\DateTimeInterface $dateReservation = null;
 
     #[ORM\Column]
+    #[Groups(['Reservation-billet_read'])]
     private ?int $nbPlacesAdult = null;
 
     #[ORM\Column]
+    #[Groups(['Reservation-billet_read'])]
     private ?int $nbPlacesChild = null;
 
     #[ORM\ManyToOne(inversedBy: 'reservations')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['Reservation-billet_read'])]
     private ?Billet $billet = null;
 
     #[ORM\ManyToOne(inversedBy: 'reservations')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['Reservation-billet_read'])]
     private ?User $user = null;
 
     #[ORM\OneToMany(mappedBy: 'reservation', targetEntity: AssoEventReservation::class, orphanRemoval: true, cascade: ['remove'])]
+    #[Groups(['Reservation-billet_read'])]
     private Collection $events;
 
     public function __construct()
