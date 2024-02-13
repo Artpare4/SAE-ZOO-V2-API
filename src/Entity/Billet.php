@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
 use App\Repository\BilletRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -10,25 +12,34 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: BilletRepository::class)]
-#[ApiResource]
+#[ApiResource(operations: [
+    new Get(openapiContext: [
+        'summary' => 'Retourne les information du billet associé à l\'id',
+        'description' => 'Retourne les information du billet associé à l\'id',
+    ]),
+    new GetCollection(openapiContext: [
+        'summary' => 'Retourne une liste de billets',
+        'description' => 'Retourne une liste de billets',
+    ], paginationClientEnabled: true),
+], normalizationContext: ['groups' => ['Billet_read']])]
 class Billet
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['Reservation-billet_read'])]
+    #[Groups(['Reservation-billet_read', 'Billet_read'])]
     private ?int $id = null;
 
     #[ORM\Column]
-    #[Groups(['Reservation-billet_read'])]
+    #[Groups(['Reservation-billet_read', 'Billet_read'])]
     private ?int $nbJours = null;
 
     #[ORM\Column]
-    #[Groups(['Reservation-billet_read'])]
+    #[Groups(['Reservation-billet_read', 'Billet_read'])]
     private ?float $tarifAdult = null;
 
     #[ORM\Column]
-    #[Groups(['Reservation-billet_read'])]
+    #[Groups(['Reservation-billet_read', 'Billet_read'])]
     private ?float $tarifChild = null;
 
     #[ORM\OneToMany(mappedBy: 'billet', targetEntity: Reservation::class)]
