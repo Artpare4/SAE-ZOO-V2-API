@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
 use App\Repository\EventRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -15,7 +16,11 @@ use Doctrine\ORM\Mapping as ORM;
     new Get(openapiContext: [
         'summary' => 'Retourne les informations de l\'event associé à l\'id',
         'description' => 'Retourne les informations de l\'event associé à l\'id',
-    ])])]
+    ]),
+    new GetCollection(openapiContext: [
+        'summary' => 'Retourne une liste d\'évènements',
+        'description' => 'Retourne une liste d\'évènements',
+    ], paginationClientEnabled: true)])]
 class Event
 {
     #[ORM\Id]
