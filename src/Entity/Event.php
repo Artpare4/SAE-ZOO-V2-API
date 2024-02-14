@@ -5,6 +5,8 @@ namespace App\Entity;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Metadata\ApiFilter;
 use App\Repository\EventRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -21,6 +23,8 @@ use Doctrine\ORM\Mapping as ORM;
         'summary' => 'Retourne une liste d\'évènements',
         'description' => 'Retourne une liste d\'évènements',
     ], paginationClientEnabled: true)])]
+#[ApiFilter(SearchFilter::class, properties: ['nomEvent' => 'partial'])]
+
 class Event
 {
     #[ORM\Id]
