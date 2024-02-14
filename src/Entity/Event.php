@@ -12,6 +12,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: EventRepository::class)]
 #[ApiResource(operations: [
@@ -22,7 +23,8 @@ use Doctrine\ORM\Mapping as ORM;
     new GetCollection(openapiContext: [
         'summary' => 'Retourne une liste d\'évènements',
         'description' => 'Retourne une liste d\'évènements',
-    ], paginationClientEnabled: true)])]
+    ], paginationClientEnabled: true),
+], normalizationContext: ['groups' => ['Event_read']])]
 #[ApiFilter(SearchFilter::class, properties: ['nomEvent' => 'partial'])]
 
 class Event
@@ -30,27 +32,35 @@ class Event
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['Event_read'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 128)]
+    #[Groups(['Event_read'])]
     private ?string $nomEvent = null;
 
     #[ORM\Column]
+    #[Groups(['Event_read'])]
     private ?int $nbPlaces = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Groups(['Event_read'])]
     private ?string $description = null;
 
     #[ORM\OneToMany(mappedBy: 'event', targetEntity: AssoEventDateEvent::class)]
+    #[Groups(['Event_read'])]
     private Collection $datesEvent;
 
     #[ORM\OneToMany(mappedBy: 'event', targetEntity: AssoEventReservation::class)]
+    #[Groups(['Event_read'])]
     private Collection $reservation;
 
     #[ORM\OneToMany(mappedBy: 'event', targetEntity: AssoEventZoneParc::class, orphanRemoval: true)]
+    #[Groups(['Event_read'])]
     private Collection $zonesParc;
 
     #[ORM\OneToMany(mappedBy: 'event', targetEntity: AssoEventAnimal::class, orphanRemoval: true)]
+    #[Groups(['Event_read'])]
     private Collection $animaux;
 
     public function __construct()
