@@ -8,6 +8,7 @@ use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\Metadata\Delete;
 use App\Repository\UserRepository;
+use App\State\UserPasswordHasher;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -22,12 +23,14 @@ use Symfony\Component\Serializer\Annotation\Groups;
     // @todo Hasher mot de passe pour User même sans session
     new Post(
         normalizationContext: ['groups' => ['User_read']],
-        denormalizationContext: ['groups' => ['User_write']]
+        denormalizationContext: ['groups' => ['User_write']],
+        processor: UserPasswordHasher::class
     ),
     new Delete(),
     new Patch(
         normalizationContext: ['groups' => ['User_read']],
-        denormalizationContext: ['groups' => ['User_write']]
+        denormalizationContext: ['groups' => ['User_write']],
+        processor: UserPasswordHasher::class
     ),
 ])]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
@@ -49,7 +52,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string The hashed password
      */
     #[ORM\Column]
-    #[Groups(['User_write'])]
     private ?string $password = null;
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Reservation::class, cascade: ['remove'], orphanRemoval: true)]
@@ -67,6 +69,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 30)]
     #[Groups(['User_read', 'User_write'])]
     private ?string $phoneUser = null;
+
+    #[Groups(['User_write'])]
+    private ?string $plainPassword = null;
 
     public function __construct()
     {
@@ -140,7 +145,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function eraseCredentials(): void
     {
         // If you store any temporary, sensitive data on the user, clear it here
-        // $this->plainPassword = null;
+        $this->plainPassword = null;
     }
 
     /**
@@ -207,5 +212,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->phoneUser = $phoneUser;
 
         return $this;
+    }
+
+    public function setPlainPassword(string $plainPassword): static
+    {
+        $this->plainPassword = $plainPassword;
+
+        return $this;
+    }
+
+    public function getPlainPassword(): ?string
+    {
+        return $this->plainPassword;
     }
 }
