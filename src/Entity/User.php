@@ -19,6 +19,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 #[ORM\Table(name: '`user`')]
 #[ApiResource(operations: [
     new Get(normalizationContext: ['groups' => ['User_read']]),
+    // @todo Hasher mot de passe pour User même sans session
     new Post(
         normalizationContext: ['groups' => ['User_read']],
         denormalizationContext: ['groups' => ['User_write']]
