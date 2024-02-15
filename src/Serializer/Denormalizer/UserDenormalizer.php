@@ -25,7 +25,7 @@ class UserDenormalizer implements DenormalizerInterface, DenormalizerAwareInterf
     public function denormalize(mixed $data, string $type, string $format = null, array $context = []): User
     {
         $context[self::ALREADY_CALLED] = true;
-        if (array_key_exists('password', $data)) {
+        if (array_key_exists('password', $data) && $this->security->isGranted(['IS_AUTHENTICATED_FULLY'])) {
             $data['password'] = $this->passwordHasher->hashPassword($this->security->getUser(), $data['password']);
         }
 
