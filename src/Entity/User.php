@@ -19,16 +19,34 @@ use Symfony\Component\Serializer\Annotation\Groups;
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
 #[ApiResource(operations: [
-    new Get(normalizationContext: ['groups' => ['User_read']]),
+    new Get(
+        openapiContext: [
+            'summary' => 'Retourne un utilisateur',
+            'description' => 'Retourne un utilisateur en fonction de son ID',
+        ],
+        normalizationContext: ['groups' => ['User_read']]
+    ),
     new Post(
+        openapiContext: [
+            'summary' => 'Permet l\'entrée d\'un nouvel utilisateur',
+            'description' => 'Permet l\'entrée d\'un nouvel utilisateur à l\'aide de toutes ses informations et hache le password',
+        ],
         normalizationContext: ['groups' => ['User_read']],
         denormalizationContext: ['groups' => ['User_write']],
         processor: UserPasswordHasher::class
     ),
     new Delete(
+        openapiContext: [
+            'summary' => 'Supprime un utilisateur',
+            'description' => 'Supprime l\'utilisateur dont l\'id est entrée',
+        ],
         security: "is_granted('ROLE_ADMIN') or object == user",
     ),
     new Patch(
+        openapiContext: [
+            'summary' => 'Modifie un utilisateur',
+            'description' => 'Modifie l\'utilisateur dont l\'id est entrée et hache le password si il est spécifié',
+        ],
         normalizationContext: ['groups' => ['User_read']],
         denormalizationContext: ['groups' => ['User_write']],
         security: "is_granted('ROLE_ADMIN') or object == user",
