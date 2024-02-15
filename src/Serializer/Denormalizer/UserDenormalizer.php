@@ -1,29 +1,45 @@
 <?php
 
+declare(strict_types=1);
+
+namespace App\Serializer\Denormalizer;
+
+use App\Entity\User;
+use Symfony\Bundle\SecurityBundle\Security;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
+use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
+use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
+
 /**
  * @method array getSupportedTypes(?string $format)
  */
-class UserDenormalizer implements \Symfony\Component\Serializer\Normalizer\DenormalizerInterface, \Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface
+class UserDenormalizer implements DenormalizerInterface, DenormalizerAwareInterface
 {
+    use DenormalizerAwareTrait;
 
-    /**
-     * @inheritDoc
-     */
-    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = [])
+    public const ALREADY_CALLED = 'USER_DENORMALIZER_ALREADY_CALLED';
+    private UserPasswordHasherInterface $passwordHasher;
+    private Security $security;
+
+    public function denormalize(mixed $data, string $type, string $format = null, array $context = []): User
     {
-        // TODO: Implement denormalize() method.
+        $context[self::ALREADY_CALLED] = true;
+        if (array_key_exists('password', $data)) {
+            $data['password'] = $this->passwordHasher->hashPassword($this->security->getUser(), $data['password']);
+        }
+
+        return $this->denormalizer->denormalize($data, $type, $format, $context);
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function supportsDenormalization(mixed $data, string $type, ?string $format = null)
+    public function supportsDenormalization(mixed $data, string $type, string $format = null, array $context = []): bool
     {
-        // TODO: Implement supportsDenormalization() method.
+        return !array_key_exists(self::ALREADY_CALLED, $context) && User::class == $type;
     }
 
-    public function __call(string $name, array $arguments)
+    public function __construct(UserPasswordHasherInterface $passwordHasher, Security $security)
     {
-        // TODO: Implement @method array getSupportedTypes(?string $format)
+        $this->passwordHasher = $passwordHasher;
+        $this->security = $security;
     }
 }
