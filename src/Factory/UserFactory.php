@@ -49,10 +49,10 @@ final class UserFactory extends ModelFactory
     protected function getDefaults(): array
     {
         return [
-            'email' => self::faker()->email(),
+            'email' => self::faker()->unique()->numerify('user###@example.com'),
             'nomUser' => self::faker()->lastName(),
-            'password' => self::faker()->password(),
-            'phoneUser' => self::faker()->phoneNumber(),
+            'password' => 'test',
+            'phoneUser' => '06'.self::faker()->randomNumber(8, true),
             'pnomUser' => self::faker()->firstName(),
             'roles' => [],
         ];

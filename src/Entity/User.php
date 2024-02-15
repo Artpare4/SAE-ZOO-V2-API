@@ -3,24 +3,88 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\Patch;
+use ApiPlatform\Metadata\Post;
+use ApiPlatform\Metadata\Delete;
 use App\Repository\UserRepository;
+use App\State\MeProvider;
+use App\State\UserPasswordHasher;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
-#[ApiResource]
+#[ApiResource(operations: [
+    new Get(
+        openapiContext: [
+            'summary' => 'Retourne un utilisateur',
+            'description' => 'Retourne un utilisateur en fonction de son ID',
+        ],
+        normalizationContext: ['groups' => ['User_read']],
+    ),
+    //@todo Test sur le /me après création d'une interface de connection
+    new Get(
+        uriTemplate: '/me',
+        openapiContext: [
+            'summary' => 'Retourne l\'utilisateur connecté',
+            'description' => 'Retourne l\'utilisateur connecté',
+            'reponses' => [
+                '200' => [
+                    'description' => 'ressource de l\'utilisateur connecté',
+                    'content' => [
+                        'application/ld+json' => [
+                            'schema' => [
+                                '$ref' => '#/components/schemas/User.jsonld-User_me_User_read',
+                            ],
+                        ],
+                    ]
+                ]
+            ]
+        ],
+        normalizationContext: ['groups' => ['User_read']],
+    ),
+    new Post(
+        openapiContext: [
+            'summary' => 'Permet l\'entrée d\'un nouvel utilisateur',
+            'description' => 'Permet l\'entrée d\'un nouvel utilisateur à l\'aide de toutes ses informations et hache le password',
+        ],
+        normalizationContext: ['groups' => ['User_read']],
+        denormalizationContext: ['groups' => ['User_write']],
+        processor: UserPasswordHasher::class
+    ),
+    new Delete(
+        openapiContext: [
+            'summary' => 'Supprime un utilisateur',
+            'description' => 'Supprime l\'utilisateur dont l\'id est entrée',
+        ],
+        security: "is_granted('ROLE_ADMIN') or object == user",
+    ),
+    new Patch(
+        openapiContext: [
+            'summary' => 'Modifie un utilisateur',
+            'description' => 'Modifie l\'utilisateur dont l\'id est entrée et hache le password si il est spécifié',
+        ],
+        normalizationContext: ['groups' => ['User_read']],
+        denormalizationContext: ['groups' => ['User_write']],
+        security: "is_granted('ROLE_ADMIN') or object == user",
+        processor: UserPasswordHasher::class,
+    ),
+])]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['User_read'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 180, unique: true)]
+    #[Groups(['User_read', 'User_write'])]
     private ?string $email = null;
 
     #[ORM\Column]
@@ -33,16 +97,23 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $password = null;
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Reservation::class, cascade: ['remove'], orphanRemoval: true)]
+    #[Groups(['User_read'])]
     private Collection $reservations;
 
     #[ORM\Column(length: 128)]
+    #[Groups(['User_read', 'User_write'])]
     private ?string $nomUser = null;
 
     #[ORM\Column(length: 128)]
+    #[Groups(['User_read', 'User_write'])]
     private ?string $pnomUser = null;
 
     #[ORM\Column(length: 30)]
+    #[Groups(['User_read', 'User_write'])]
     private ?string $phoneUser = null;
+
+    #[Groups(['User_write'])]
+    private ?string $plainPassword = null;
 
     public function __construct()
     {
@@ -116,7 +187,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function eraseCredentials(): void
     {
         // If you store any temporary, sensitive data on the user, clear it here
-        // $this->plainPassword = null;
+        $this->plainPassword = null;
     }
 
     /**
@@ -183,5 +254,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->phoneUser = $phoneUser;
 
         return $this;
+    }
+
+    public function setPlainPassword(string $plainPassword): static
+    {
+        $this->plainPassword = $plainPassword;
+
+        return $this;
+    }
+
+    public function getPlainPassword(): ?string
+    {
+        return $this->plainPassword;
     }
 }
