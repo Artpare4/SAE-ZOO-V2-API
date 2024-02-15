@@ -20,17 +20,19 @@ use Symfony\Component\Serializer\Annotation\Groups;
 #[ORM\Table(name: '`user`')]
 #[ApiResource(operations: [
     new Get(normalizationContext: ['groups' => ['User_read']]),
-    // @todo Hasher mot de passe pour User même sans session
     new Post(
         normalizationContext: ['groups' => ['User_read']],
         denormalizationContext: ['groups' => ['User_write']],
         processor: UserPasswordHasher::class
     ),
-    new Delete(),
+    new Delete(
+        security: "is_granted('ROLE_ADMIN') or object == user",
+    ),
     new Patch(
         normalizationContext: ['groups' => ['User_read']],
         denormalizationContext: ['groups' => ['User_write']],
-        processor: UserPasswordHasher::class
+        security: "is_granted('ROLE_ADMIN') or object == user",
+        processor: UserPasswordHasher::class,
     ),
 ])]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
