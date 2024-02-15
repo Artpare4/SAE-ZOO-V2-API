@@ -8,6 +8,7 @@ use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\Metadata\Delete;
 use App\Repository\UserRepository;
+use App\State\MeProvider;
 use App\State\UserPasswordHasher;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -24,7 +25,28 @@ use Symfony\Component\Serializer\Annotation\Groups;
             'summary' => 'Retourne un utilisateur',
             'description' => 'Retourne un utilisateur en fonction de son ID',
         ],
-        normalizationContext: ['groups' => ['User_read']]
+        normalizationContext: ['groups' => ['User_read']],
+    ),
+    //@todo Test sur le /me après création d'une interface de connection
+    new Get(
+        uriTemplate: '/me',
+        openapiContext: [
+            'summary' => 'Retourne l\'utilisateur connecté',
+            'description' => 'Retourne l\'utilisateur connecté',
+            'reponses' => [
+                '200' => [
+                    'description' => 'ressource de l\'utilisateur connecté',
+                    'content' => [
+                        'application/ld+json' => [
+                            'schema' => [
+                                '$ref' => '#/components/schemas/User.jsonld-User_me_User_read',
+                            ],
+                        ],
+                    ]
+                ]
+            ]
+        ],
+        normalizationContext: ['groups' => ['User_read']],
     ),
     new Post(
         openapiContext: [
