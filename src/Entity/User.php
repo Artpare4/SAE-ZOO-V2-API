@@ -13,6 +13,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
@@ -27,9 +28,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['User_read'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 180, unique: true)]
+    #[Groups(['User_read', 'User_write'])]
     private ?string $email = null;
 
     #[ORM\Column]
@@ -39,18 +42,23 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string The hashed password
      */
     #[ORM\Column]
+    #[Groups(['User_write'])]
     private ?string $password = null;
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Reservation::class, cascade: ['remove'], orphanRemoval: true)]
+    #[Groups(['User_read'])]
     private Collection $reservations;
 
     #[ORM\Column(length: 128)]
+    #[Groups(['User_read', 'User_write'])]
     private ?string $nomUser = null;
 
     #[ORM\Column(length: 128)]
+    #[Groups(['User_read', 'User_write'])]
     private ?string $pnomUser = null;
 
     #[ORM\Column(length: 30)]
+    #[Groups(['User_read', 'User_write'])]
     private ?string $phoneUser = null;
 
     public function __construct()
