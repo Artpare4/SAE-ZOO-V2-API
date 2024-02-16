@@ -12,7 +12,10 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: HabitatRepository::class)]
 #[ApiResource(operations: [
-    new Get(),
+    new Get(openapiContext: [
+        'summary' => 'Retourne les informations de l\'habitat associé à l\'id',
+        'description' => 'Retourne les informations de l\'habitat associé à l\'id',
+    ]),
 ])]
 class Habitat
 {
