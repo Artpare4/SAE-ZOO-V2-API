@@ -15,7 +15,11 @@ use Doctrine\ORM\Mapping as ORM;
     new Get(openapiContext: [
         'summary' => 'Retourne les informations de la zone parc associée à l\'id',
         'description' => 'Retourne les informations de la zone parc associée à l\'id',
-    ])])]
+    ]),
+    new GetCollection(openapiContext: [
+        'summary' => 'Retourne une liste de zones parc',
+        'description' => 'Retourne une liste de zones parc',
+    ], paginationClientEnabled: true)])]
 class ZoneParc
 {
     #[ORM\Id]
