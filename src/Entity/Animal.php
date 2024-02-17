@@ -18,6 +18,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 #[GetCollection(
     openapiContext: [
         'summary' => 'Récupère une collection d\'animaux',
+        'description' => 'Récupère une collection d\'animaux',
     ]
 )]
 #[GetCollection(
@@ -31,6 +32,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 #[Get(
     openapiContext: [
         'summary' => 'Récupère un animal grâce à son identifiant',
+        'description' => 'Récupère un animal grâce à son identifiant',
     ]
 )]
 class Animal
