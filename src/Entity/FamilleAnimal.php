@@ -21,11 +21,13 @@ use Doctrine\ORM\Mapping as ORM;
 #[GetCollection(
     openapiContext: [
         'summary' => 'Récupère une collection de familles d\'animaux',
+        'description' => 'Récupère une collection de familles d\'animaux',
     ]
 )]
 #[Get(
     openapiContext: [
         'summary' => 'Récupère une famille d\'animaux grâce à son identifiant',
+        'description' => 'Récupère une famille d\'animaux grâce à son identifiant',
     ]
 )]
 class FamilleAnimal
