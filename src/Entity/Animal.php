@@ -5,6 +5,7 @@ namespace App\Entity;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Link;
 use App\Repository\AnimalRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -17,6 +18,14 @@ use Symfony\Component\Serializer\Annotation\Groups;
 #[GetCollection(
     openapiContext: [
         'summary' => 'Récupère une collection d\'animaux',
+    ]
+)]
+#[GetCollection(
+    uriTemplate: '/famille_animals/{id}/animaux',
+    uriVariables: ['id' => new Link(fromProperty: 'animals', fromClass: FamilleAnimal::class)],
+    openapiContext: [
+        'summary' => 'Récupère une collection d\'animaux appartenant à une Famille d\'animaux',
+        'description' => 'Récupère une collection d\'animaux appartenant à une Famille d\'animaux',
     ]
 )]
 #[Get(
