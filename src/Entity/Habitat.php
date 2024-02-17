@@ -3,13 +3,20 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Get;
 use App\Repository\HabitatRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: HabitatRepository::class)]
-#[ApiResource]
+#[ApiResource(operations: [
+    new Get(openapiContext: [
+        'summary' => 'Retourne les informations de l\'habitat associé à l\'id',
+        'description' => 'Retourne les informations de l\'habitat associé à l\'id',
+    ]),
+])]
 class Habitat
 {
     #[ORM\Id]
@@ -17,6 +24,7 @@ class Habitat
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Groups(['get'])]
     #[ORM\Column(length: 128)]
     private ?string $libHabitat = null;
 
