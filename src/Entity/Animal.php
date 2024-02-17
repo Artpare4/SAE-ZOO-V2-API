@@ -21,14 +21,6 @@ use Symfony\Component\Serializer\Annotation\Groups;
         'description' => 'Récupère une collection d\'animaux',
     ]
 )]
-#[GetCollection(
-    uriTemplate: '/famille_animals/{id}/animaux',
-    uriVariables: ['id' => new Link(fromProperty: 'animals', fromClass: FamilleAnimal::class)],
-    openapiContext: [
-        'summary' => 'Récupère une collection d\'animaux appartenant à une Famille d\'animaux',
-        'description' => 'Récupère une collection d\'animaux appartenant à une Famille d\'animaux',
-    ]
-)]
 #[Get(
     openapiContext: [
         'summary' => 'Récupère un animal grâce à son identifiant',
