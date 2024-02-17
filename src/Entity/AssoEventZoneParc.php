@@ -5,6 +5,7 @@ namespace App\Entity;
 use ApiPlatform\Metadata\ApiResource;
 use App\Repository\AssoEventZoneParcRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: AssoEventZoneParcRepository::class)]
 #[ApiResource(openapi: false)]
@@ -21,6 +22,7 @@ class AssoEventZoneParc
 
     #[ORM\ManyToOne(inversedBy: 'events')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['Event_read'])]
     private ?ZoneParc $zoneParc = null;
 
     public function getId(): ?int

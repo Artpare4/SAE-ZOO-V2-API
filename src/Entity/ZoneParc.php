@@ -26,11 +26,11 @@ class ZoneParc
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['Famille_read'])]
+    #[Groups(['Famille_read', 'Event_read'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 128)]
-    #[Groups(['Famille_read'])]
+    #[Groups(['Famille_read', 'Event_read'])]
     private ?string $libZone = null;
 
     #[ORM\OneToMany(mappedBy: 'zoneParc', targetEntity: FamilleAnimal::class)]
