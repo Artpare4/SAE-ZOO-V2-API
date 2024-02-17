@@ -15,7 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: FamilleAnimalRepository::class)]
-#[ApiResource(normalizationContext: ['groups' => ['Famille_read']])]
+#[ApiResource()]
 #[ApiFilter(
     SearchFilter::class, properties: ['nomFamilleAnimal' => 'partial']
 )]
@@ -29,7 +29,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
     openapiContext: [
         'summary' => 'Récupère une famille d\'animaux grâce à son identifiant',
         'description' => 'Récupère une famille d\'animaux grâce à son identifiant',
-    ]
+    ], normalizationContext: ['groups' => ['Famille_read']]
 )]
 class FamilleAnimal
 {
