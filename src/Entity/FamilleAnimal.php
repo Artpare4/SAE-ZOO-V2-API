@@ -23,7 +23,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
     openapiContext: [
         'summary' => 'Récupère une collection de familles d\'animaux',
         'description' => 'Récupère une collection de familles d\'animaux',
-    ]
+    ], normalizationContext: ['groups' => ['Famille_collection_read']]
 )]
 #[Get(
     openapiContext: [
@@ -36,15 +36,15 @@ class FamilleAnimal
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['Famille_read'])]
+    #[Groups(['Famille_read', 'Famille_collection_read'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 128)]
-    #[Groups(['Famille_read'])]
+    #[Groups(['Famille_read', 'Famille_collection_read'])]
     private ?string $nomFamilleAnimal = null;
 
     #[ORM\Column(length: 128)]
-    #[Groups(['Famille_read'])]
+    #[Groups(['Famille_read', 'Famille_collection_read'])]
     private ?string $nomScientifique = null;
 
     #[ORM\Column]
