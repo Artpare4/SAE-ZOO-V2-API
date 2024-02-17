@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
 use App\Repository\AnimalRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -11,6 +13,16 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: AnimalRepository::class)]
 #[ApiResource]
+#[GetCollection(
+    openapiContext: [
+        'summary' => 'Récupère une collection d\'animaux',
+    ]
+)]
+#[Get(
+    openapiContext: [
+        'summary' => 'Récupère un animal grâce à son identifiant',
+    ]
+)]
 class Animal
 {
     #[ORM\Id]
