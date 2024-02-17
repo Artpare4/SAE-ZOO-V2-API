@@ -5,6 +5,7 @@ namespace App\Entity;
 use ApiPlatform\Metadata\ApiResource;
 use App\Repository\AssoEventDateEventRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: AssoEventDateEventRepository::class)]
 #[ApiResource(openapi: false)]
@@ -21,6 +22,7 @@ class AssoEventDateEvent
 
     #[ORM\ManyToOne(inversedBy: 'events')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['Event_read'])]
     private ?DateEvent $dateEvent = null;
 
     #[ORM\Column(length: 10)]
