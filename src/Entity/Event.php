@@ -2,11 +2,11 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
-use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
-use ApiPlatform\Metadata\ApiFilter;
 use App\Repository\EventRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -19,14 +19,13 @@ use Symfony\Component\Serializer\Annotation\Groups;
     new Get(openapiContext: [
         'summary' => 'Retourne les informations de l\'event associé à l\'id',
         'description' => 'Retourne les informations de l\'event associé à l\'id',
-    ]),
+    ], normalizationContext: ['groups' => ['Event_read']]),
     new GetCollection(openapiContext: [
         'summary' => 'Retourne une liste d\'évènements',
         'description' => 'Retourne une liste d\'évènements',
     ], paginationClientEnabled: true),
 ], normalizationContext: ['groups' => ['Event_read']])]
 #[ApiFilter(SearchFilter::class, properties: ['nomEvent' => 'partial'])]
-
 class Event
 {
     #[ORM\Id]
