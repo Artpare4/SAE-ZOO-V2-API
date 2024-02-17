@@ -5,6 +5,8 @@ namespace App\Entity;
 use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
 use App\Repository\FamilleAnimalRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -15,6 +17,16 @@ use Doctrine\ORM\Mapping as ORM;
 #[ApiResource]
 #[ApiFilter(
     SearchFilter::class, properties: ['nomFamilleAnimal' => 'partial']
+)]
+#[GetCollection(
+    openapiContext: [
+        'summary' => 'Récupère une collection de familles d\'animaux',
+    ]
+)]
+#[Get(
+    openapiContext: [
+        'summary' => 'Récupère une famille d\'animaux grâce à son identifiant',
+    ]
 )]
 class FamilleAnimal
 {
