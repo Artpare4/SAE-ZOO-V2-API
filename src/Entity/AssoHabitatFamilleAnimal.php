@@ -21,7 +21,7 @@ class AssoHabitatFamilleAnimal
 
     #[ORM\ManyToOne(inversedBy: 'assoHabitatFamilleAnimals')]
     #[ORM\JoinColumn(nullable: false)]
-    #[Groups(['get'])]
+    #[Groups(['get','Famille_read'])]
     private ?Habitat $habitat = null;
 
     #[ORM\ManyToOne(inversedBy: 'assoHabitatFamilleAnimals')]

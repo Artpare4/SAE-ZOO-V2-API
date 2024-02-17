@@ -12,9 +12,10 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: FamilleAnimalRepository::class)]
-#[ApiResource]
+#[ApiResource(normalizationContext: ['groups' => ['Famille_read']])]
 #[ApiFilter(
     SearchFilter::class, properties: ['nomFamilleAnimal' => 'partial']
 )]
@@ -35,33 +36,43 @@ class FamilleAnimal
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['Famille_read'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 128)]
+    #[Groups(['Famille_read'])]
     private ?string $nomFamilleAnimal = null;
 
     #[ORM\Column(length: 128)]
+    #[Groups(['Famille_read'])]
     private ?string $nomScientifique = null;
 
     #[ORM\Column]
+    #[Groups(['Famille_read'])]
     private ?int $dangerExtinction = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Groups(['Famille_read'])]
     private ?string $description = null;
 
     #[ORM\Column(length: 128)]
+    #[Groups(['Famille_read'])]
     private ?string $typeAlimentation = null;
 
     #[ORM\ManyToOne(inversedBy: 'familleAnimals')]
+    #[Groups(['Famille_read'])]
     private ?ZoneParc $zoneParc = null;
 
     #[ORM\OneToMany(mappedBy: 'familleAnimal', targetEntity: Animal::class)]
+    #[Groups(['Famille_read'])]
     private Collection $animals;
 
     #[ORM\ManyToOne(inversedBy: 'familleAnimals')]
+    #[Groups(['Famille_read'])]
     private ?Espece $espece = null;
 
     #[ORM\OneToMany(mappedBy: 'familleAnimal', targetEntity: AssoHabitatFamilleAnimal::class)]
+    #[Groups(['Famille_read'])]
     private Collection $assoHabitatFamilleAnimals;
 
     public function __construct()

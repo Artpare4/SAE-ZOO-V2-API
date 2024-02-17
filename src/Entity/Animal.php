@@ -10,6 +10,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: AnimalRepository::class)]
 #[ApiResource]
@@ -28,9 +29,11 @@ class Animal
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['Famille_read'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 128)]
+    #[Groups(['Famille_read'])]
     private ?string $nomAnimal = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
