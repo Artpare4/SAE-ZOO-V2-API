@@ -28,7 +28,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
     ]
 )]
 #[Get(
-    uriTemplate: 'animal/{id}/image',
+    uriTemplate: '/animals/{id}/image',
     controller: GetImageAnimalController::class, openapiContext: [
     'summary' => 'Récupère l\'image de l\'animal grâce à son identifiant',
     'description' => 'Récupère l\'image de l\'animal grâce à son identifiant',
