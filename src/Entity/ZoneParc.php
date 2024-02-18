@@ -5,6 +5,7 @@ namespace App\Entity;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
+use App\Controller\GetImageZoneController;
 use App\Repository\ZoneParcRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -20,7 +21,20 @@ use Symfony\Component\Serializer\Annotation\Groups;
     new GetCollection(openapiContext: [
         'summary' => 'Retourne une liste de zones parc',
         'description' => 'Retourne une liste de zones parc',
-    ], paginationClientEnabled: true)])]
+    ], paginationClientEnabled: true),
+    new Get(
+        uriTemplate: '/zone_parcs/{id}/image',
+        controller: GetImageZoneController::class,
+        openapiContext: [
+        'summary' => 'Récupère l\'image de la zone grâce à son identifiant',
+        'description' => 'Récupère l\'image de la zone grâce à son identifiant',
+        'responses' => [
+            '200' => [
+                'description' => 'image de la Zone du parc',
+            ],
+        ],
+            ]
+    )])]
 class ZoneParc
 {
     #[ORM\Id]
