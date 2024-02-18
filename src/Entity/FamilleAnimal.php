@@ -75,6 +75,9 @@ class FamilleAnimal
     #[Groups(['Famille_read'])]
     private Collection $assoHabitatFamilleAnimals;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $imgFamille = null;
+
     public function __construct()
     {
         $this->animals = new ArrayCollection();
@@ -226,6 +229,18 @@ class FamilleAnimal
                 $assoHabitatFamilleAnimal->setFamilleAnimal(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getImgFamille(): ?string
+    {
+        return $this->imgFamille;
+    }
+
+    public function setImgFamille(?string $imgFamille): static
+    {
+        $this->imgFamille = $imgFamille;
 
         return $this;
     }
