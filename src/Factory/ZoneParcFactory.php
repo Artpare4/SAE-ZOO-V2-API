@@ -46,8 +46,15 @@ final class ZoneParcFactory extends ModelFactory
      */
     protected function getDefaults(): array
     {
+        $files = glob('public/image/zone_parc/*');
+        $filesAndPathCorrect = [];
+        foreach ($files as $file) {
+            $filesAndPathCorrect[] = './image/zone_parc/'.basename($file);
+        }
+
         return [
             'libZone' => self::faker()->word(),
+            'imgZone' => self::faker()->randomElement($filesAndPathCorrect),
         ];
     }
 

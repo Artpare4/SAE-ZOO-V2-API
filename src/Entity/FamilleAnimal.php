@@ -7,6 +7,7 @@ use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
+use App\Controller\GetImageFamilleController;
 use App\Repository\FamilleAnimalRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -30,6 +31,19 @@ use Symfony\Component\Serializer\Annotation\Groups;
         'summary' => 'Récupère une famille d\'animaux grâce à son identifiant',
         'description' => 'Récupère une famille d\'animaux grâce à son identifiant',
     ], normalizationContext: ['groups' => ['Famille_read']]
+)]
+#[Get(
+    uriTemplate: '/famille_animals/{id}/image',
+    controller: GetImageFamilleController::class,
+    openapiContext: [
+        'summary' => 'Récupère l\'image de la famille d\'animaux grâce à son identifiant',
+        'description' => 'Récupère l\'image de la famille d\'animaux grâce à son identifiant',
+        'responses' => [
+            '200' => [
+                'description' => 'image de la famille d\'animaux',
+            ],
+        ],
+    ]
 )]
 class FamilleAnimal
 {
@@ -74,6 +88,9 @@ class FamilleAnimal
     #[ORM\OneToMany(mappedBy: 'familleAnimal', targetEntity: AssoHabitatFamilleAnimal::class)]
     #[Groups(['Famille_read'])]
     private Collection $assoHabitatFamilleAnimals;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $imgFamille = null;
 
     public function __construct()
     {
@@ -226,6 +243,18 @@ class FamilleAnimal
                 $assoHabitatFamilleAnimal->setFamilleAnimal(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getImgFamille(): ?string
+    {
+        return $this->imgFamille;
+    }
+
+    public function setImgFamille(?string $imgFamille): static
+    {
+        $this->imgFamille = $imgFamille;
 
         return $this;
     }

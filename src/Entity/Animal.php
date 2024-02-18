@@ -5,7 +5,7 @@ namespace App\Entity;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
-use ApiPlatform\Metadata\Link;
+use App\Controller\GetImageAnimalController;
 use App\Repository\AnimalRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -26,6 +26,18 @@ use Symfony\Component\Serializer\Annotation\Groups;
         'summary' => 'Récupère un animal grâce à son identifiant',
         'description' => 'Récupère un animal grâce à son identifiant',
     ]
+)]
+#[Get(
+    uriTemplate: '/animals/{id}/image',
+    controller: GetImageAnimalController::class, openapiContext: [
+    'summary' => 'Récupère l\'image de l\'animal grâce à son identifiant',
+    'description' => 'Récupère l\'image de l\'animal grâce à son identifiant',
+        'responses' => [
+            '200' => [
+                'description' => 'image de l\'animal',
+            ],
+        ],
+]
 )]
 class Animal
 {
@@ -59,6 +71,9 @@ class Animal
 
     #[ORM\OneToMany(mappedBy: 'animal', targetEntity: AssoEventAnimal::class, orphanRemoval: true)]
     private Collection $events;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $imgAnimal = null;
 
     public function __construct()
     {
@@ -180,6 +195,18 @@ class Animal
                 $event->setAnimal(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getImgAnimal(): ?string
+    {
+        return $this->imgAnimal;
+    }
+
+    public function setImgAnimal(?string $imgAnimal): static
+    {
+        $this->imgAnimal = $imgAnimal;
 
         return $this;
     }
