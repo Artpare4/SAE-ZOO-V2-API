@@ -1,17 +1,22 @@
 [
   {
-    "libZone": "Zone Aquatique"
+    "libZone": "Zone Aquatique",
+    "imgZone": "public/image/zone_parc/zone_illustration.jpg"
   },
   {
-    "libZone": "Ferme"
+    "libZone": "Ferme",
+    "imgZone": "public/image/zone_parc/zone_illustration.jpg"
   },
   {
-    "libZone": "Voilère des Oiseaux"
+    "libZone": "Voilère des Oiseaux",
+    "imgZone": "public/image/zone_parc/zone_illustration.jpg"
   },
   {
-    "libZone": "Terre des lions"
+    "libZone": "Terre des lions",
+    "imgZone": "public/image/zone_parc/zone_illustration.jpg"
   },
   {
-    "libZone": "Bois des Fauves"
+    "libZone": "Bois des Fauves",
+    "imgZone": "public/image/zone_parc/zone_illustration.jpg"
   }
 ]
