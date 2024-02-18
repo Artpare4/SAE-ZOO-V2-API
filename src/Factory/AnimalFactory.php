@@ -47,13 +47,17 @@ final class AnimalFactory extends ModelFactory
     protected function getDefaults(): array
     {
         $files = glob('public/image/animaux/*');
+        $filesAndPathCorrect = [];
+        foreach ($files as $file) {
+            $filesAndPathCorrect[] = './image/animaux/'.basename($file);
+        }
         $result = [
             'caracteristique' => self::faker()->text(128),
             'dateNaissance' => self::faker()->dateTimeInInterval('-20 years', '+10 years'),
             'nomAnimal' => self::faker()->firstName(),
             'poids' => self::faker()->randomFloat(2, 0, 6000),
             'taille' => self::faker()->randomFloat(2, 0, 800),
-            'imgAnimal' => self::faker()->randomElement($files),
+            'imgAnimal' => self::faker()->randomElement($filesAndPathCorrect),
         ];
         if (self::faker()->boolean(33)) {
             $result['dateMort'] = self::faker()->dateTimeInInterval('-10 years', '+10 years');
