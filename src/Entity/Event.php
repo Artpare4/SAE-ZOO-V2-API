@@ -7,6 +7,7 @@ use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
+use App\Controller\GetImageEventController;
 use App\Repository\EventRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -24,6 +25,19 @@ use Symfony\Component\Serializer\Annotation\Groups;
         'summary' => 'Retourne une liste d\'évènements',
         'description' => 'Retourne une liste d\'évènements',
     ], paginationClientEnabled: true),
+    new Get(
+        uriTemplate: '/events/{id}/image',
+        controller: GetImageEventController::class,
+        openapiContext: [
+            'summary' => 'Récupère l\'image de l\'événement grâce à son identifiant',
+            'description' => 'Récupère l\'image de l\'événement grâce à son identifiant',
+            'responses' => [
+                '200' => [
+                    'description' => 'image de l\'événement',
+                ],
+            ],
+        ]
+    ),
 ], normalizationContext: ['groups' => ['Event_read']])]
 #[ApiFilter(SearchFilter::class, properties: ['nomEvent' => 'partial'])]
 class Event
