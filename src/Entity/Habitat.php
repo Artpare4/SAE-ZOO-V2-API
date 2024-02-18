@@ -22,10 +22,11 @@ class Habitat
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['get', 'Famille_read'])]
     private ?int $id = null;
 
-    #[Groups(['get'])]
     #[ORM\Column(length: 128)]
+    #[Groups(['get', 'Famille_read'])]
     private ?string $libHabitat = null;
 
     #[ORM\OneToMany(mappedBy: 'habitat', targetEntity: AssoHabitatFamilleAnimal::class)]

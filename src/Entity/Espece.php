@@ -4,7 +4,6 @@ namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
-use ApiPlatform\Metadata\GetCollection;
 use App\Repository\EspeceRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -20,9 +19,11 @@ class Espece
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['Famille_read'])]
     private ?int $id = null;
-    #[Groups(['get'])]
+
     #[ORM\Column(length: 128)]
+    #[Groups(['get', 'Famille_read'])]
     private ?string $libEspece = null;
 
     #[ORM\OneToMany(mappedBy: 'espece', targetEntity: FamilleAnimal::class)]

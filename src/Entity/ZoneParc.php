@@ -9,6 +9,7 @@ use App\Repository\ZoneParcRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: ZoneParcRepository::class)]
 #[ApiResource(operations: [
@@ -25,9 +26,11 @@ class ZoneParc
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['Famille_read', 'Event_read'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 128)]
+    #[Groups(['Famille_read', 'Event_read'])]
     private ?string $libZone = null;
 
     #[ORM\OneToMany(mappedBy: 'zoneParc', targetEntity: FamilleAnimal::class)]
