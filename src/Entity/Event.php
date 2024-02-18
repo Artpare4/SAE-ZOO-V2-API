@@ -62,6 +62,9 @@ class Event
     #[Groups(['Event_read'])]
     private Collection $animaux;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $imgEvent = null;
+
     public function __construct()
     {
         $this->datesEvent = new ArrayCollection();
@@ -227,6 +230,18 @@ class Event
                 $animaux->setEvent(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getImgEvent(): ?string
+    {
+        return $this->imgEvent;
+    }
+
+    public function setImgEvent(?string $imgEvent): static
+    {
+        $this->imgEvent = $imgEvent;
 
         return $this;
     }
