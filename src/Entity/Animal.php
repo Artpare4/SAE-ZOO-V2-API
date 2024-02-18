@@ -60,6 +60,9 @@ class Animal
     #[ORM\OneToMany(mappedBy: 'animal', targetEntity: AssoEventAnimal::class, orphanRemoval: true)]
     private Collection $events;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $imgAnimal = null;
+
     public function __construct()
     {
         $this->events = new ArrayCollection();
@@ -180,6 +183,18 @@ class Animal
                 $event->setAnimal(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getImgAnimal(): ?string
+    {
+        return $this->imgAnimal;
+    }
+
+    public function setImgAnimal(?string $imgAnimal): static
+    {
+        $this->imgAnimal = $imgAnimal;
 
         return $this;
     }
