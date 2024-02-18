@@ -39,6 +39,9 @@ class ZoneParc
     #[ORM\OneToMany(mappedBy: 'zoneParc', targetEntity: AssoEventZoneParc::class, orphanRemoval: true)]
     private Collection $events;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $imgZone = null;
+
     public function __construct()
     {
         $this->familleAnimals = new ArrayCollection();
@@ -118,6 +121,18 @@ class ZoneParc
                 $event->setZoneParc(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getImgZone(): ?string
+    {
+        return $this->imgZone;
+    }
+
+    public function setImgZone(?string $imgZone): static
+    {
+        $this->imgZone = $imgZone;
 
         return $this;
     }
