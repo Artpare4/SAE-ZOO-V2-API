@@ -5,7 +5,6 @@ namespace App\Entity;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
-use ApiPlatform\Metadata\Link;
 use App\Controller\GetImageAnimalController;
 use App\Repository\AnimalRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -30,7 +29,15 @@ use Symfony\Component\Serializer\Annotation\Groups;
 )]
 #[Get(
     uriTemplate: 'animal/{id}/image',
-    controller: GetImageAnimalController::class
+    controller: GetImageAnimalController::class, openapiContext: [
+    'summary' => 'Récupère l\'image de l\'animal grâce à son identifiant',
+    'description' => 'Récupère l\'image de l\'animal grâce à son identifiant',
+        'responses' => [
+            '200' => [
+                'description' => 'image de l\'animal',
+            ],
+        ],
+]
 )]
 class Animal
 {
