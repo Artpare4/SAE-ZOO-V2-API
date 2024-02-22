@@ -15,6 +15,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ReservationRepository::class)]
 #[ApiResource(operations: [
@@ -65,10 +66,12 @@ class Reservation
 
     #[ORM\Column]
     #[Groups(['Reservation-billet_read'])]
+    #[Assert\PositiveOrZero]
     private ?int $nbPlacesAdult = null;
 
     #[ORM\Column]
     #[Groups(['Reservation-billet_read'])]
+    #[Assert\PositiveOrZero]
     private ?int $nbPlacesChild = null;
 
     #[ORM\ManyToOne(inversedBy: 'reservations')]
