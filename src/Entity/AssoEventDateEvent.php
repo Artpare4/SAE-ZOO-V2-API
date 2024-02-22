@@ -6,6 +6,7 @@ use ApiPlatform\Metadata\ApiResource;
 use App\Repository\AssoEventDateEventRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: AssoEventDateEventRepository::class)]
 #[ApiResource(openapi: false)]
@@ -26,6 +27,7 @@ class AssoEventDateEvent
     private ?DateEvent $dateEvent = null;
 
     #[ORM\Column(length: 10)]
+    #[Assert\Regex("[0-9]{2}:[0-9]{2}")]
     private ?string $horaire = null;
 
     public function getId(): ?int

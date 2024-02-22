@@ -11,6 +11,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ZoneParcRepository::class)]
 #[ApiResource(operations: [
@@ -45,6 +46,7 @@ class ZoneParc
 
     #[ORM\Column(length: 128)]
     #[Groups(['Famille_read', 'Event_read'])]
+    #[Assert\Regex('/[a-zA-ZÀ-ù0-9-\s]/')]
     private ?string $libZone = null;
 
     #[ORM\OneToMany(mappedBy: 'zoneParc', targetEntity: FamilleAnimal::class)]

@@ -10,6 +10,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: BilletRepository::class)]
 #[ApiResource(operations: [
@@ -32,14 +33,17 @@ class Billet
 
     #[ORM\Column]
     #[Groups(['Reservation-billet_read', 'Billet_read'])]
+    #[Assert\Positive]
     private ?int $nbJours = null;
 
     #[ORM\Column]
     #[Groups(['Reservation-billet_read', 'Billet_read'])]
+    #[Assert\PositiveOrZero]
     private ?float $tarifAdult = null;
 
     #[ORM\Column]
     #[Groups(['Reservation-billet_read', 'Billet_read'])]
+    #[Assert\PositiveOrZero]
     private ?float $tarifChild = null;
 
     #[ORM\OneToMany(mappedBy: 'billet', targetEntity: Reservation::class)]

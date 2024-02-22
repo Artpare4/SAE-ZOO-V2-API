@@ -12,6 +12,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: AnimalRepository::class)]
 #[ApiResource]
@@ -49,6 +50,7 @@ class Animal
 
     #[ORM\Column(length: 128)]
     #[Groups(['Famille_read'])]
+    #[Assert\Regex('/[a-zA-ZÀ-ù-\s]/')]
     private ?string $nomAnimal = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
@@ -58,15 +60,18 @@ class Animal
     private ?\DateTimeInterface $dateMort = null;
 
     #[ORM\Column]
+    #[Assert\PositiveOrZero]
     private ?float $taille = null;
 
     #[ORM\Column]
+    #[Assert\PositiveOrZero]
     private ?float $poids = null;
 
     #[ORM\ManyToOne(inversedBy: 'animals')]
     private ?FamilleAnimal $familleAnimal = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
+    #[Assert\Regex(match: false, pattern: '/[<>#\\$]/')]
     private ?string $caracteristique = null;
 
     #[ORM\OneToMany(mappedBy: 'animal', targetEntity: AssoEventAnimal::class, orphanRemoval: true)]

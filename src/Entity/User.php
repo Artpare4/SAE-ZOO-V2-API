@@ -15,7 +15,9 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\Validator\Constraints\UserPassword;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
@@ -85,6 +87,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 180, unique: true)]
     #[Groups(['User_read', 'User_write'])]
+    #[Assert\Email]
     private ?string $email = null;
 
     #[ORM\Column]
@@ -102,14 +105,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 128)]
     #[Groups(['User_read', 'User_write'])]
+    #[Assert\Regex('/[a-zA-ZÀ-ù-\s]/')]
     private ?string $nomUser = null;
 
     #[ORM\Column(length: 128)]
     #[Groups(['User_read', 'User_write'])]
+    #[Assert\Regex('/[a-zA-ZÀ-ù-\s]/')]
     private ?string $pnomUser = null;
 
     #[ORM\Column(length: 30)]
     #[Groups(['User_read', 'User_write'])]
+    #[Assert\Regex('/0[0-9]{9}/')]
     private ?string $phoneUser = null;
 
     #[Groups(['User_write'])]

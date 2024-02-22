@@ -14,6 +14,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: EventRepository::class)]
 #[ApiResource(operations: [
@@ -50,14 +51,17 @@ class Event
 
     #[ORM\Column(length: 128)]
     #[Groups(['Event_read'])]
+    #[Assert\Regex('/[a-zA-ZÀ-ù0-9-\s]/')]
     private ?string $nomEvent = null;
 
     #[ORM\Column]
     #[Groups(['Event_read'])]
+    #[Assert\PositiveOrZero]
     private ?int $nbPlaces = null;
 
     #[ORM\Column(type: Types::TEXT)]
     #[Groups(['Event_read'])]
+    #[Assert\Regex(pattern: '/[<>#\\$]/', match: false)]
     private ?string $description = null;
 
     #[ORM\OneToMany(mappedBy: 'event', targetEntity: AssoEventDateEvent::class)]
