@@ -79,7 +79,22 @@
             "php bin/console doctrine:fixtures:load --no-interaction"
         ],
         "test:cs": "php vendor/bin/php-cs-fixer fix --dry-run",
-        "fix:cs":  "php vendor/bin/php-cs-fixer fix"
+        "fix:cs":  "php vendor/bin/php-cs-fixer fix",
+        "test:codeception":[
+            "php vendor/bin/codecept clean",
+            "APP_ENV=test php bin/console doctrine:database:drop --force",
+            "APP_ENV=test php bin/console doctrine:database:create",
+            "APP_ENV=test php bin/console doctrine:schema:create --quiet",
+            "php vendor/bin/codecept run --no-artifacts"
+        ],
+        "test": [
+            "@test:cs",
+            "@test:codeception"
+        ]
+    },
+    "scripts-descriptions": {
+        "test:codeception": "Lancement des tests relatifs à Codeception.",
+        "test" : "Lancement des tous les scripts relatifs aux tests"
     },
     "conflict": {
         "symfony/symfony": "*"
