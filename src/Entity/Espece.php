@@ -8,6 +8,7 @@ use App\Repository\EspeceRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: EspeceRepository::class)]
@@ -24,6 +25,7 @@ class Espece
 
     #[ORM\Column(length: 128)]
     #[Groups(['get', 'Famille_read'])]
+    #[Assert\Regex('/[a-zA-ZÀ-ù-]/')]
     private ?string $libEspece = null;
 
     #[ORM\OneToMany(mappedBy: 'espece', targetEntity: FamilleAnimal::class)]
