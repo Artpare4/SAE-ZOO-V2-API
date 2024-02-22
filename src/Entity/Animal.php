@@ -50,7 +50,7 @@ class Animal
 
     #[ORM\Column(length: 128)]
     #[Groups(['Famille_read'])]
-    #[Assert\Regex('/[a-zA-ZÀ-ù-]/')]
+    #[Assert\Regex('/[a-zA-ZÀ-ù-\s]/')]
     private ?string $nomAnimal = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
