@@ -14,6 +14,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: FamilleAnimalRepository::class)]
 #[ApiResource()]
@@ -55,22 +56,27 @@ class FamilleAnimal
 
     #[ORM\Column(length: 128)]
     #[Groups(['Famille_read', 'Famille_collection_read'])]
+    #[Assert\Regex('/[a-zA-ZÀ-ù0-9-\s]/')]
     private ?string $nomFamilleAnimal = null;
 
     #[ORM\Column(length: 128)]
     #[Groups(['Famille_read', 'Famille_collection_read'])]
+    #[Assert\Regex('/[a-zA-ZÀ-ù0-9-\s]/')]
     private ?string $nomScientifique = null;
 
     #[ORM\Column]
     #[Groups(['Famille_read'])]
+    #[Assert\Range(min:0,max: 5)]
     private ?int $dangerExtinction = null;
 
     #[ORM\Column(type: Types::TEXT)]
     #[Groups(['Famille_read'])]
+    #[Assert\Regex(pattern: '/[<>#\\$]/', match: false)]
     private ?string $description = null;
 
     #[ORM\Column(length: 128)]
     #[Groups(['Famille_read'])]
+    #[Assert\Regex(pattern: '/[<>#\\$]/', match: false)]
     private ?string $typeAlimentation = null;
 
     #[ORM\ManyToOne(inversedBy: 'familleAnimals')]
