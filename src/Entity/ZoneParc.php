@@ -22,7 +22,7 @@ use Symfony\Component\Validator\Constraints as Assert;
     new GetCollection(openapiContext: [
         'summary' => 'Retourne une liste de zones parc',
         'description' => 'Retourne une liste de zones parc',
-    ], paginationClientEnabled: true),
+    ], paginationClientEnabled: true, normalizationContext: ['groups' => 'ZoneParc_read']),
     new Get(
         uriTemplate: '/zone_parcs/{id}/image',
         controller: GetImageZoneController::class,
@@ -41,11 +41,11 @@ class ZoneParc
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['Famille_read', 'Event_read'])]
+    #[Groups(['Famille_read', 'Event_read', 'ZoneParc_read'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 128)]
-    #[Groups(['Famille_read', 'Event_read'])]
+    #[Groups(['Famille_read', 'Event_read', 'ZoneParc_read'])]
     #[Assert\Regex('/[a-zA-ZÀ-ù0-9-\s]/')]
     private ?string $libZone = null;
 
