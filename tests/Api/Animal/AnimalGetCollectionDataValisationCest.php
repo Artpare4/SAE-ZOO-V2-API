@@ -19,7 +19,6 @@ class AnimalGetCollectionDataValisationCest
             'familleAnimal' => 'array|string',
             'caracteristique' => 'string',
             'events' => 'array',
-            'imgAnimal' => 'string',
         ];
     }
 
@@ -35,7 +34,6 @@ class AnimalGetCollectionDataValisationCest
             'familleAnimal' => 'array|string',
             'caracteristique' => 'string',
             'events' => 'array',
-            'imgAnimal' => 'string',
         ];
     }
 
