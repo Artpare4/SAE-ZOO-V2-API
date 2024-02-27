@@ -74,4 +74,16 @@ class AnimalGetCollectionDataValisationCest
         $apiTester->seeResponseIsJson();
         $apiTester->seeResponseIsAnItem(self::expectedPropertiesForDeadAnimal());
     }
+
+    public function getImageAnimal(ApiTester $apiTester)
+    {
+        $data = [
+            'imgAnimal' => 'public/image/animaux/animal-placeholder.png',
+        ];
+        $animal = AnimalFactory::createOne($data)->object();
+        $apiTester->sendGet('/api/animals/1/image');
+        $apiTester->seeResponseCodeIsSuccessful();
+        $apiTester->seeHttpHeader('Content-Type', 'image/png');
+        $apiTester->seeResponseContains(file_get_contents($animal->getImgAnimal(), true));
+    }
 }
