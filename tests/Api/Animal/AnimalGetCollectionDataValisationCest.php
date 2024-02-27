@@ -18,7 +18,7 @@ class AnimalGetCollectionDataValisationCest
             'poids' => 'integer|float',
             'familleAnimal' => 'array|string',
             'caracteristique' => 'string',
-            'events' => 'array|string',
+            'events' => 'array',
             'imgAnimal' => 'string',
         ];
     }
