@@ -25,7 +25,7 @@ use Symfony\Component\Validator\Constraints as Assert;
     new GetCollection(openapiContext: [
         'summary' => 'Retourne une liste d\'évènements',
         'description' => 'Retourne une liste d\'évènements',
-    ], paginationClientEnabled: true),
+    ]),
     new Get(
         uriTemplate: '/events/{id}/image',
         controller: GetImageEventController::class,
