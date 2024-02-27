@@ -18,11 +18,13 @@ use Symfony\Component\Validator\Constraints as Assert;
     new Get(openapiContext: [
         'summary' => 'Retourne les informations de la zone parc associée à l\'id',
         'description' => 'Retourne les informations de la zone parc associée à l\'id',
-    ]),
+    ],
+        normalizationContext: ['groups' => 'ZoneParc_read_details']),
     new GetCollection(openapiContext: [
         'summary' => 'Retourne une liste de zones parc',
         'description' => 'Retourne une liste de zones parc',
-    ], paginationClientEnabled: true, normalizationContext: ['groups' => 'ZoneParc_read']),
+    ], paginationClientEnabled: true,
+        normalizationContext: ['groups' => 'ZoneParc_read']),
     new Get(
         uriTemplate: '/zone_parcs/{id}/image',
         controller: GetImageZoneController::class,
@@ -41,18 +43,20 @@ class ZoneParc
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['Famille_read', 'Event_read', 'ZoneParc_read'])]
+    #[Groups(['Famille_read', 'Event_read', 'ZoneParc_read', 'ZoneParc_read_details'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 128)]
-    #[Groups(['Famille_read', 'Event_read', 'ZoneParc_read'])]
+    #[Groups(['Famille_read', 'Event_read', 'ZoneParc_read', 'ZoneParc_read_details'])]
     #[Assert\Regex('/[a-zA-ZÀ-ù0-9-\s]/')]
     private ?string $libZone = null;
 
     #[ORM\OneToMany(mappedBy: 'zoneParc', targetEntity: FamilleAnimal::class)]
+    #[Groups(['ZoneParc_read_details'])]
     private Collection $familleAnimals;
 
     #[ORM\OneToMany(mappedBy: 'zoneParc', targetEntity: AssoEventZoneParc::class, orphanRemoval: true)]
+    #[Groups(['ZoneParc_read_details'])]
     private Collection $events;
 
     #[ORM\Column(length: 255, nullable: true)]
