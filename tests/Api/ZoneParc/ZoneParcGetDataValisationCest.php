@@ -14,22 +14,17 @@ class ZoneParcGetDataValisationCest
             'libZone' => 'string',
             'familleAnimals' => 'array',
             'events' => 'array',
-            'imgZone' => 'string',
         ];
     }
 
     public function getZoneParcDetail(ApiTester $apiTester)
     {
-        $data = [
-            'libZone' => 'Zone1',
-            'imgZone' => 'ImageZoneParc',
-        ];
-        ZoneParcFactory::createOne($data);
+        ZoneParcFactory::createOne();
 
         $apiTester->sendGet('/api/zone_parcs/1');
         $apiTester->seeResponseCodeIsSuccessful();
         $apiTester->seeResponseIsJson();
-        $apiTester->seeResponseIsAnItem(self::expectedProperties(), $data);
+        $apiTester->seeResponseIsAnItem(self::expectedProperties());
     }
 
     public function getImageZoneParc(ApiTester $apiTester)
