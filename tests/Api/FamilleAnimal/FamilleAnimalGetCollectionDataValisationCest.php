@@ -14,7 +14,6 @@ class FamilleAnimalGetCollectionDataValisationCest
             'id' => 'integer',
             'nomFamilleAnimal' => 'string',
             'nomScientifique' => 'string',
-            'imgFamille' => 'string',
         ];
     }
 
