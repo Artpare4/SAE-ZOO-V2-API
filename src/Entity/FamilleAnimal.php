@@ -96,6 +96,7 @@ class FamilleAnimal
     private Collection $assoHabitatFamilleAnimals;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['Famille_read', 'Famille_collection_read'])]
     private ?string $imgFamille = null;
 
     public function __construct()

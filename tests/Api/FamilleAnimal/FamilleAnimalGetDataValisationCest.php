@@ -22,6 +22,7 @@ class FamilleAnimalGetDataValisationCest
             'animals' => 'array',
             'espece' => 'array',
             'assoHabitatFamilleAnimals' => 'array',
+            'imgFamille' => 'string',
         ];
     }
 
