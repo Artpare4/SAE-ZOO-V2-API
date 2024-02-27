@@ -15,7 +15,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: AnimalRepository::class)]
-#[ApiResource]
+#[ApiResource(normalizationContext: ['groups' => ['Animal_read']])]
 #[GetCollection(
     openapiContext: [
         'summary' => 'Récupère une collection d\'animaux',
@@ -45,36 +45,43 @@ class Animal
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['Famille_read'])]
+    #[Groups(['Famille_read', 'Animal_read'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 128)]
-    #[Groups(['Famille_read'])]
+    #[Groups(['Famille_read', 'Animal_read'])]
     #[Assert\Regex('/[a-zA-ZÀ-ù-\s]/')]
     private ?string $nomAnimal = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Groups(['Animal_read'])]
     private ?\DateTimeInterface $dateNaissance = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
+    #[Groups(['Animal_read'])]
     private ?\DateTimeInterface $dateMort = null;
 
     #[ORM\Column]
     #[Assert\PositiveOrZero]
+    #[Groups(['Animal_read'])]
     private ?float $taille = null;
 
     #[ORM\Column]
     #[Assert\PositiveOrZero]
+    #[Groups(['Animal_read'])]
     private ?float $poids = null;
 
     #[ORM\ManyToOne(inversedBy: 'animals')]
+    #[Groups(['Animal_read'])]
     private ?FamilleAnimal $familleAnimal = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     #[Assert\Regex(match: false, pattern: '/[<>#\\$]/')]
+    #[Groups(['Animal_read'])]
     private ?string $caracteristique = null;
 
     #[ORM\OneToMany(mappedBy: 'animal', targetEntity: AssoEventAnimal::class, orphanRemoval: true)]
+    #[Groups(['Animal_read'])]
     private Collection $events;
 
     #[ORM\Column(length: 255, nullable: true)]
