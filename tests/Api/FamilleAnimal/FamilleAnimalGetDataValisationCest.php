@@ -42,4 +42,16 @@ class FamilleAnimalGetDataValisationCest
         $apiTester->seeResponseIsJson();
         $apiTester->seeResponseIsAnItem(self::expectedProperties());
     }
+
+    public function getImageFamilleAnimal(ApiTester $apiTester)
+    {
+        $data = [
+            'imgFamille' => 'public/image/famille_animal/cerf.jpg',
+        ];
+        $img = FamilleAnimalFactory::createOne($data)->object();
+        $apiTester->sendGet('/api/famille_animals/1/image');
+        $apiTester->seeResponseCodeIsSuccessful();
+        $apiTester->seeHttpHeader('Content-Type', 'image/jpeg');
+        $apiTester->seeResponseContains(file_get_contents($img->getImgFamille(), true));
+    }
 }
