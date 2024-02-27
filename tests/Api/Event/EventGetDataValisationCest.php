@@ -20,6 +20,7 @@ class EventGetDataValisationCest
             'animaux' => 'array',
         ];
     }
+
     public function getEventDetail(ApiTester $apiTester)
     {
         EventFactory::createOne();
@@ -27,5 +28,17 @@ class EventGetDataValisationCest
         $apiTester->seeResponseCodeIsSuccessful();
         $apiTester->seeResponseIsJson();
         $apiTester->seeResponseIsAnItem(self::expectedProperties());
+    }
+
+    public function getImageEvent(ApiTester $apiTester)
+    {
+        $data = [
+            'imgEvent' => 'public/image/events/soigneur.jpg',
+        ];
+        $event = EventFactory::createOne($data)->object();
+        $apiTester->sendGet('/api/events/1/image');
+        $apiTester->seeResponseCodeIsSuccessful();
+        $apiTester->seeHttpHeader('Content-Type', 'image/jpeg');
+        $apiTester->seeResponseContains(file_get_contents($event->getImgEvent(), true));
     }
 }
