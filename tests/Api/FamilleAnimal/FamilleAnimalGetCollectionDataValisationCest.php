@@ -32,4 +32,31 @@ class FamilleAnimalGetCollectionDataValisationCest
         $apiTester->seeResponseContainsJson(['hydra:totalItems' => 4]);
         $apiTester->seeResponseMatchesJsonType(self::expectedProperties(), '$["hydra:member"][0]');
     }
+
+    public function getFilteredListFamilleAnimal(ApiTester $apiTester)
+    {
+        FamilleAnimalFactory::createSequence([
+            [
+                'nomFamilleAnimal' => 'Famille1',
+            ],
+            [
+                'nomFamilleAnimal' => 'Kiwi',
+            ],
+            [
+                'nomFamilleAnimal' => 'AnimalFamilleTest3',
+            ],
+            [
+                'nomFamilleAnimal' => 'FamiAni4',
+            ],
+
+        ]);
+        $apiTester->sendGet('/api/famille_animals?page=1&nomFamilleAnimal=Famille');
+
+        $apiTester->seeResponseCodeIsSuccessful();
+        $apiTester->seeResponseIsJson();
+        $apiTester->seeResponseContainsJson(['hydra:totalItems' => 2]);
+        $apiTester->seeResponseMatchesJsonType(self::expectedProperties(), '$["hydra:member"][0]');
+        $apiTester->seeResponseMatchesJsonType(self::expectedProperties(), '$["hydra:member"][1]');
+
+    }
 }
