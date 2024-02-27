@@ -21,7 +21,7 @@ use Symfony\Component\Validator\Constraints as Assert;
     new GetCollection(openapiContext: [
         'summary' => 'Retourne une liste de billets',
         'description' => 'Retourne une liste de billets',
-    ], paginationClientEnabled: true),
+    ]),
 ], normalizationContext: ['groups' => ['Billet_read']])]
 class Billet
 {

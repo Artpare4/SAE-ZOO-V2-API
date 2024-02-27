@@ -23,7 +23,7 @@ use Symfony\Component\Validator\Constraints as Assert;
     new GetCollection(openapiContext: [
         'summary' => 'Retourne une liste de zones parc',
         'description' => 'Retourne une liste de zones parc',
-    ], paginationClientEnabled: true,
+    ],
         normalizationContext: ['groups' => 'ZoneParc_read']),
     new Get(
         uriTemplate: '/zone_parcs/{id}/image',
