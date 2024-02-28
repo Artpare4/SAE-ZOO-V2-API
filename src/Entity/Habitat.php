@@ -12,12 +12,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: HabitatRepository::class)]
-#[ApiResource(operations: [
-    new Get(openapiContext: [
-        'summary' => 'Retourne les informations de l\'habitat associé à l\'id',
-        'description' => 'Retourne les informations de l\'habitat associé à l\'id',
-    ]),
-])]
+#[ApiResource(openapi: false)]
 class Habitat
 {
     #[ORM\Id]
