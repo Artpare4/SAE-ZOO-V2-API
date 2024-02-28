@@ -25,7 +25,8 @@ use Symfony\Component\Validator\Constraints as Assert;
     new GetCollection(openapiContext: [
         'summary' => 'Retourne une liste d\'évènements',
         'description' => 'Retourne une liste d\'évènements',
-    ]),
+    ],
+        normalizationContext: ['groups' => ['Event_read_collection']]),
     new Get(
         uriTemplate: '/events/{id}/image',
         controller: GetImageEventController::class,
@@ -46,21 +47,21 @@ class Event
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['Event_read'])]
+    #[Groups(['Event_read', 'Event_read_collection'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 128)]
-    #[Groups(['Event_read'])]
+    #[Groups(['Event_read', 'Event_read_collection'])]
     #[Assert\Regex('/[a-zA-ZÀ-ù0-9-\s]/')]
     private ?string $nomEvent = null;
 
     #[ORM\Column]
-    #[Groups(['Event_read'])]
+    #[Groups(['Event_read', 'Event_read_collection'])]
     #[Assert\PositiveOrZero]
     private ?int $nbPlaces = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    #[Groups(['Event_read'])]
+    #[Groups(['Event_read', 'Event_read_collection'])]
     #[Assert\Regex(pattern: '/[<>#\\$]/', match: false)]
     private ?string $description = null;
 
