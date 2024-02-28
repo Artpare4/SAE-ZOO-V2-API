@@ -40,7 +40,7 @@ use Symfony\Component\Validator\Constraints as Assert;
             ],
         ]
     ),
-], normalizationContext: ['groups' => ['Event_read']])]
+])]
 #[ApiFilter(SearchFilter::class, properties: ['nomEvent' => 'partial'])]
 class Event
 {
