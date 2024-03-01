@@ -16,12 +16,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: AnimalRepository::class)]
 #[ApiResource(normalizationContext: ['groups' => ['Animal_read']])]
-#[GetCollection(
-    openapiContext: [
-        'summary' => 'Récupère une collection d\'animaux',
-        'description' => 'Récupère une collection d\'animaux',
-    ]
-)]
 #[Get(
     openapiContext: [
         'summary' => 'Récupère un animal grâce à son identifiant',
