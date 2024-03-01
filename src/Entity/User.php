@@ -49,6 +49,7 @@ use Symfony\Component\Validator\Constraints as Assert;
             ]
         ],
         normalizationContext: ['groups' => ['User_read']],
+        security: "is_granted('IS_AUTHENTICATED_FULLY')"
     ),
     new Post(
         openapiContext: [
