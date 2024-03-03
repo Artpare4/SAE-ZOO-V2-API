@@ -14,7 +14,7 @@ class UserGetMeCest
             'id' => 'integer',
             'email' => 'string',
             'reservations' => 'array',
-            'phone' => 'string',
+            'phoneUser' => 'string',
             'nomUser' => 'string',
             'pnomUser' => 'string',
         ];
@@ -32,7 +32,6 @@ class UserGetMeCest
         $I->seeResponseCodeIs(401);
     }
 
-    /*
     public function authenticatedUserCanGetMe(ApiTester $I): void
     {
         // 1. Arrange
@@ -50,5 +49,4 @@ class UserGetMeCest
         $I->seeResponseIsAnItem(self::expectedProperties());
 
     }
-    */
 }
