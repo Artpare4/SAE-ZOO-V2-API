@@ -3,10 +3,10 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Delete;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Post;
-use ApiPlatform\Metadata\Delete;
 use App\Repository\UserRepository;
 use App\State\MeProvider;
 use App\State\UserPasswordHasher;
@@ -15,7 +15,6 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Security\Core\Validator\Constraints\UserPassword;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -29,7 +28,7 @@ use Symfony\Component\Validator\Constraints as Assert;
         ],
         normalizationContext: ['groups' => ['User_read']],
     ),
-    //@todo Test sur le /me après création d'une interface de connection
+    // @todo Test sur le /me après création d'une interface de connection
     new Get(
         uriTemplate: '/me',
         openapiContext: [
@@ -44,12 +43,13 @@ use Symfony\Component\Validator\Constraints as Assert;
                                 '$ref' => '#/components/schemas/User.jsonld-User_me_User_read',
                             ],
                         ],
-                    ]
-                ]
-            ]
+                    ],
+                ],
+            ],
         ],
         normalizationContext: ['groups' => ['User_read']],
-        security: "is_granted('IS_AUTHENTICATED_FULLY')"
+        security: "is_granted('IS_AUTHENTICATED_FULLY')",
+        provider: MeProvider::class
     ),
     new Post(
         openapiContext: [
