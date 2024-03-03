@@ -25,3 +25,9 @@ services:
     App\State\UserPasswordHasher:
         bind:
             $processor: '@api_platform.doctrine.orm.state.persist_processor'
+
+when@test:
+    services:
+        # Disable logger to avoid showing errors during tests
+        Psr\Log\NullLogger: ~
+        logger: '@Psr\Log\NullLogger'
