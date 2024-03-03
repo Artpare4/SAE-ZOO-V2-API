@@ -27,6 +27,7 @@ use Symfony\Component\Validator\Constraints as Assert;
             'description' => 'Retourne un utilisateur en fonction de son ID',
         ],
         normalizationContext: ['groups' => ['User_read']],
+        security: "is_granted('ROLE_ADMIN')"
     ),
     // @todo Test sur le /me après création d'une interface de connection
     new Get(
