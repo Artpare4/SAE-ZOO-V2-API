@@ -10,6 +10,6 @@ class EventFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        EventFactory::createMany(20);
+        EventFactory::createMany(60);
     }
 }

@@ -16,7 +16,7 @@ class FamilleAnimalFixtures extends Fixture implements DependentFixtureInterface
     {
         // $product = new Product();
         // $manager->persist($product);
-        $familles = FamilleAnimalFactory::createMany(30, function () {
+        $familles = FamilleAnimalFactory::createMany(60, function () {
             return [
               'zoneParc' => ZoneParcFactory::random(),
               'espece' => EspeceFactory::random(),

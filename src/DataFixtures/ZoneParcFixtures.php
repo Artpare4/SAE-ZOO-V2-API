@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\ZoneParc;
+use App\Factory\ZoneParcFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
@@ -20,6 +21,7 @@ class ZoneParcFixtures extends Fixture
             $zoneParc->setImgZone($zone['imgZone']);
             $manager->persist($zoneParc);
         }
+        ZoneParcFactory::createMany(40);
         $manager->flush();
     }
 }
