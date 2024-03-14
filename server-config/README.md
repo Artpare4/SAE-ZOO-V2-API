@@ -30,3 +30,5 @@ setfacl -Rb ~/.ssh
 ```
 ssh root@10.31.33.119
 ```
+
+> La console demande la clé de cryptage du serveur. cette dernière est `saezoo`
