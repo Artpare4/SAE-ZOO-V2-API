@@ -6,6 +6,7 @@
     "require": {
         "php": ">=8.1",
         "ext-ctype": "*",
+        "ext-fileinfo": "*",
         "ext-iconv": "*",
         "api-platform/core": "^3.2",
         "doctrine/doctrine-bundle": "^2.11",
@@ -27,8 +28,8 @@
         "symfony/serializer": "6.3.*",
         "symfony/twig-bundle": "6.3.*",
         "symfony/validator": "6.3.*",
-        "symfony/yaml": "6.3.*",
-      "ext-fileinfo": "*"
+        "symfony/webpack-encore-bundle": "^2.1",
+        "symfony/yaml": "6.3.*"
     },
     "config": {
         "allow-plugins": {
