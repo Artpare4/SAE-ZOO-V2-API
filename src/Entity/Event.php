@@ -47,21 +47,21 @@ class Event
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['Event_read', 'Event_read_collection'])]
+    #[Groups(['Event_read', 'Event_read_collection', 'ZoneParc_read_details'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 128)]
-    #[Groups(['Event_read', 'Event_read_collection'])]
+    #[Groups(['Event_read', 'Event_read_collection', 'ZoneParc_read_details'])]
     #[Assert\Regex('/[a-zA-ZÀ-ù0-9-\s]/')]
     private ?string $nomEvent = null;
 
     #[ORM\Column]
-    #[Groups(['Event_read', 'Event_read_collection'])]
+    #[Groups(['Event_read', 'Event_read_collection', 'ZoneParc_read_details'])]
     #[Assert\PositiveOrZero]
     private ?int $nbPlaces = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    #[Groups(['Event_read', 'Event_read_collection'])]
+    #[Groups(['Event_read', 'Event_read_collection', 'ZoneParc_read_details'])]
     #[Assert\Regex(pattern: '/[<>#\\$]/', match: false)]
     private ?string $description = null;
 

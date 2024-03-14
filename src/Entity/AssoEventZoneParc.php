@@ -18,6 +18,7 @@ class AssoEventZoneParc
 
     #[ORM\ManyToOne(inversedBy: 'zonesParc')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['ZoneParc_read_details'])]
     private ?Event $event = null;
 
     #[ORM\ManyToOne(inversedBy: 'events')]

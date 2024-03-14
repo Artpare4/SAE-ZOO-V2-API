@@ -51,22 +51,22 @@ class FamilleAnimal
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['Famille_read', 'Famille_collection_read'])]
+    #[Groups(['Famille_read', 'Famille_collection_read', 'ZoneParc_read_details'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 128)]
-    #[Groups(['Famille_read', 'Famille_collection_read'])]
+    #[Groups(['Famille_read', 'Famille_collection_read', 'ZoneParc_read_details'])]
     #[Assert\Regex('/[a-zA-ZÀ-ù0-9-\s]/')]
     private ?string $nomFamilleAnimal = null;
 
     #[ORM\Column(length: 128)]
-    #[Groups(['Famille_read', 'Famille_collection_read'])]
+    #[Groups(['Famille_read', 'Famille_collection_read', 'ZoneParc_read_details'])]
     #[Assert\Regex('/[a-zA-ZÀ-ù0-9-\s]/')]
     private ?string $nomScientifique = null;
 
     #[ORM\Column]
     #[Groups(['Famille_read'])]
-    #[Assert\Range(min:0,max: 5)]
+    #[Assert\Range(min: 0, max: 5)]
     private ?int $dangerExtinction = null;
 
     #[ORM\Column(type: Types::TEXT)]
