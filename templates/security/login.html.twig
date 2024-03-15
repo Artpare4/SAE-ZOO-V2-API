@@ -3,29 +3,51 @@
 {% block title %}Log in!{% endblock %}
 
 {% block body %}
-<form method="post">
-    {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
+    <div class="bg-background-100 h-[100%]">
+        <div class="flex justify-center items-center min-h-full w-[90%] lg:w-[50%] mx-auto ">
+            <div style="background: linear-gradient(rgba(255,255,255,.4), rgba(255,255,255,.4)), url({{ asset('images/lion.png') }})" class="w-full h-fit p-12 rounded-3xl lg:rounded-2xl" >
+                <h1 class="text-center text-text-950 text-8xl lg:text-6xl mb-5">Connexion</h1>
+                <form method="post">
+                    {% if error %}
+                        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                    {% endif %}
+                    {% if app.user %}
+                        <div>
+                            <div class="flex-col mb-3" >
+                                <div class="bg-secondary-800/60 backdrop-filter backdrop-blur-sm border border-secondary-50 border-s text-cl md:text-2xl">Vous êtes connecté(e) {{ app.user.pnomUser }}</div>
+                                <div class=" flex justify-center mt-4">
+                                    <button class="btn bg-secondary-800/60 backdrop-filter backdrop-blur-sm border border-secondary-50 border-s font-bold py-2 px-4 border border-s border-primary-50 rounded">
+                                        <a href="{{ path('app_logout') }}">Se déconnecter</a>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    {% else %}
 
-    {% if app.user %}
-        <div class="mb-3">
-            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+                        <div class="flex flex-col">
+                            <label class="text-text-950 text-cl md:text-2xl required">Email</label>
+                            <div class="text-text-950"></div>
+                            <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="text-lg text-secondary-50 p-3 bg-secondary-800/60 backdrop-filter backdrop-blur-sm border border-secondary-50 border-s rounded-2xl" autocomplete="email" required autofocus>
+
+                        </div>
+
+                        <div class="flex flex-col mt-4">
+                            <label class="text-text-950 text-cl md:text-2xl required">Mot de passe</label>
+                            <div class="text-text-950"></div>
+                            <input type="password" name="password" id="inputPassword" class="text-lg text-secondary-50 p-3  bg-secondary-800/60 backdrop-filter backdrop-blur-sm border border-secondary-50 border-s rounded-2xl" autocomplete="current-password" required>
+
+                        </div>
+
+                        <input type="hidden" name="_csrf_token"
+                               value="{{ csrf_token('authenticate') }}"
+                        >
+
+                        <div class="flex justify-center mt-4">
+                            <button type="submit" class="btn bg-primary-500/70 col-start-2 col-end-4 text-4xl lg:text-2xl rounded-xl p-2 border border-primary-50 border-s">Connexion</button>
+                        </div>
+                    {% endif %}
+                </form>
+            </div>
         </div>
-    {% endif %}
-
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputEmail">Email</label>
-    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
-    <label for="inputPassword">Password</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
-
-    <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}"
-    >
-
-    <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
-    </button>
-</form>
+    </div>
 {% endblock %}
