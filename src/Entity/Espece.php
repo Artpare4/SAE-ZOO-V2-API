@@ -12,9 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: EspeceRepository::class)]
-#[ApiResource(operations: [
-    new Get(),
-])]
+#[ApiResource(openapi: false)]
 class Espece
 {
     #[ORM\Id]
