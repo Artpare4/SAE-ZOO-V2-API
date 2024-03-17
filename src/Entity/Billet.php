@@ -32,17 +32,17 @@ class Billet
     private ?int $id = null;
 
     #[ORM\Column]
-    #[Groups(['Reservation-billet_read', 'Billet_read'])]
+    #[Groups(['Reservation-billet_read', 'Billet_read', 'User_read_reservation'])]
     #[Assert\Positive]
     private ?int $nbJours = null;
 
     #[ORM\Column]
-    #[Groups(['Reservation-billet_read', 'Billet_read'])]
+    #[Groups(['Reservation-billet_read', 'Billet_read', 'User_read_reservation'])]
     #[Assert\PositiveOrZero]
     private ?float $tarifAdult = null;
 
     #[ORM\Column]
-    #[Groups(['Reservation-billet_read', 'Billet_read'])]
+    #[Groups(['Reservation-billet_read', 'Billet_read', 'User_read_reservation'])]
     #[Assert\PositiveOrZero]
     private ?float $tarifChild = null;
 
