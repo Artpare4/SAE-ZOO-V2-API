@@ -61,22 +61,22 @@ class Reservation
     private ?int $id = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    #[Groups(['Reservation-billet_read'])]
+    #[Groups(['Reservation-billet_read', 'User_read_reservation'])]
     private ?\DateTimeInterface $dateReservation = null;
 
     #[ORM\Column]
-    #[Groups(['Reservation-billet_read'])]
+    #[Groups(['Reservation-billet_read', 'User_read_reservation'])]
     #[Assert\PositiveOrZero]
     private ?int $nbPlacesAdult = null;
 
     #[ORM\Column]
-    #[Groups(['Reservation-billet_read'])]
+    #[Groups(['Reservation-billet_read', 'User_read_reservation'])]
     #[Assert\PositiveOrZero]
     private ?int $nbPlacesChild = null;
 
     #[ORM\ManyToOne(inversedBy: 'reservations')]
     #[ORM\JoinColumn(nullable: false)]
-    #[Groups(['Reservation-billet_read'])]
+    #[Groups(['Reservation-billet_read', 'User_read_reservation'])]
     private ?Billet $billet = null;
 
     #[ORM\ManyToOne(inversedBy: 'reservations')]
@@ -84,7 +84,7 @@ class Reservation
     #[Groups(['Reservation-billet_read'])]
     private ?User $user = null;
 
-    #[ORM\OneToMany(mappedBy: 'reservation', targetEntity: AssoEventReservation::class, orphanRemoval: true, cascade: ['remove'])]
+    #[ORM\OneToMany(mappedBy: 'reservation', targetEntity: AssoEventReservation::class, cascade: ['remove'], orphanRemoval: true)]
     #[Groups(['Reservation-billet_read'])]
     private Collection $events;
 

@@ -47,7 +47,7 @@ use Symfony\Component\Validator\Constraints as Assert;
                 ],
             ],
         ],
-        normalizationContext: ['groups' => ['User_read']],
+        normalizationContext: ['groups' => ['User_read', 'User_read_reservation']],
         security: "is_granted('IS_AUTHENTICATED_FULLY')",
         provider: MeProvider::class
     ),
@@ -101,7 +101,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $password = null;
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Reservation::class, cascade: ['remove'], orphanRemoval: true)]
-    #[Groups(['User_read'])]
+    #[Groups(['User_read', 'User_read_reservation'])]
     private Collection $reservations;
 
     #[ORM\Column(length: 128)]
