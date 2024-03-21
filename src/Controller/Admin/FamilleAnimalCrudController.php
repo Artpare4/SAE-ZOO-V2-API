@@ -35,9 +35,8 @@ class FamilleAnimalCrudController extends AbstractCrudController
             AssociationField::new('animals')
                 ->setFormTypeOption('choice_label', 'nomAnimal')
                 ->setFormTypeOption('by_reference', false),
-            ImageField::new('imgFamilleAnimal', 'Image')
-                ->setBasePath('images/famille_animal')
-                ->setUploadDir('public/images/famille_animal'),
+            ImageField::new('imgFamille', 'Image')
+                ->setUploadDir('public/image/famille_animal'),
             AssociationField::new('espece', 'Espèce')
                 ->setFormTypeOption('choice_label', 'libEspece')
                 ->formatValue(function ($entity) {
