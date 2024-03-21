@@ -15,14 +15,13 @@ class EspeceCrudController extends AbstractCrudController
         return Espece::class;
     }
 
-    /*
+
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id'),
-            TextField::new('title'),
-            TextEditorField::new('description'),
+            IdField::new('id')->hideOnForm(),
+            TextField::new('libEspece', 'Nom de l\'espece'),
         ];
     }
-    */
+
 }
