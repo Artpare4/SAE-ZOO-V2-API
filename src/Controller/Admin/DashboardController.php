@@ -2,6 +2,13 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Animal;
+use App\Entity\Billet;
+use App\Entity\DateEvent;
+use App\Entity\Espece;
+use App\Entity\Event;
+use App\Entity\FamilleAnimal;
+use App\Entity\Habitat;
 use App\Entity\User;
 use App\Entity\ZoneParc;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
@@ -42,9 +49,13 @@ class DashboardController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
-        yield MenuItem::linkToCrud('Zone Parc', 'fas fa-tree', ZoneParc::class);
+        yield MenuItem::linkToDashboard('Home', 'fa fa-home');
         yield MenuItem::linkToCrud('User', 'fa-solid fa-user', User::class);
+        yield MenuItem::linkToCrud('Zone Parc', 'fas fa-tree', ZoneParc::class);
+        yield MenuItem::linkToCrud('Evenement', 'fas fa-users', Event::class);
+        yield MenuItem::linkToCrud('Famille d\'animaux', 'fas fa-hippo', FamilleAnimal::class);
+        yield MenuItem::linkToCrud('Habitat', 'fas fa-mountain-sun', Habitat::class);
+        yield MenuItem::linkToCrud('Espèce', 'fa-solid fa-worm', Espece::class);
 
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }
