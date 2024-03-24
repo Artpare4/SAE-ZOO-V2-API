@@ -48,7 +48,7 @@ class ZoneParc
 
     #[ORM\Column(length: 128)]
     #[Groups(['Famille_read', 'Event_read', 'ZoneParc_read', 'ZoneParc_read_details'])]
-    #[Assert\Regex('/[a-zA-ZÀ-ù0-9-\s]/')]
+    #[Assert\Regex(pattern: '/[<>#\\$]+/', match: false)]
     private ?string $libZone = null;
 
     #[ORM\OneToMany(mappedBy: 'zoneParc', targetEntity: FamilleAnimal::class)]
