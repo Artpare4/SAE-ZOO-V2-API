@@ -38,7 +38,9 @@ class AnimalCrudController extends AbstractCrudController
                 ->setFormTypeOption('choice_label', 'nomEvent')
                 ->setFormTypeOption('by_reference', false),
             ImageField::new('imgAnimal')
-                ->setUploadDir('public/image/animaux'),
+                ->setUploadDir('public/image/animaux')
+                ->setUploadedFileNamePattern('./image/animaux/[slug].[extension]'),
+
         ];
     }
 }
