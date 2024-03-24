@@ -52,7 +52,7 @@ class Event
 
     #[ORM\Column(length: 128)]
     #[Groups(['Event_read', 'Event_read_collection', 'ZoneParc_read_details'])]
-    #[Assert\Regex('/[a-zA-ZÀ-ù0-9-\s]/')]
+    #[Assert\Regex(pattern: '/[<>#\\$]/', match: false)]
     private ?string $nomEvent = null;
 
     #[ORM\Column]
@@ -62,7 +62,7 @@ class Event
 
     #[ORM\Column(type: Types::TEXT)]
     #[Groups(['Event_read', 'Event_read_collection', 'ZoneParc_read_details'])]
-    #[Assert\Regex(pattern: '/[<>#\\$]/', match: false)]
+    //#[Assert\Regex(pattern: '/[<>#\\$]/', match: false)]
     private ?string $description = null;
 
     #[ORM\OneToMany(mappedBy: 'event', targetEntity: AssoEventDateEvent::class)]
