@@ -56,12 +56,12 @@ class FamilleAnimal
 
     #[ORM\Column(length: 128)]
     #[Groups(['Famille_read', 'Famille_collection_read', 'ZoneParc_read_details'])]
-    #[Assert\Regex('/[a-zA-ZÀ-ù0-9-\s]/')]
+    #[Assert\Regex(pattern: '/[<>#\\$]+/', match: false)]
     private ?string $nomFamilleAnimal = null;
 
     #[ORM\Column(length: 128)]
     #[Groups(['Famille_read', 'Famille_collection_read', 'ZoneParc_read_details'])]
-    #[Assert\Regex('/[a-zA-ZÀ-ù0-9-\s]/')]
+    #[Assert\Regex(pattern: '/[<>#\\$]+/', match: false)]
     private ?string $nomScientifique = null;
 
     #[ORM\Column]
@@ -71,12 +71,12 @@ class FamilleAnimal
 
     #[ORM\Column(type: Types::TEXT)]
     #[Groups(['Famille_read'])]
-    #[Assert\Regex(pattern: '/[<>#\\$]/', match: false)]
+    // #[Assert\Regex(pattern: '/[<>#\\$]+/', match: false)]
     private ?string $description = null;
 
     #[ORM\Column(length: 128)]
     #[Groups(['Famille_read'])]
-    #[Assert\Regex(pattern: '/[<>#\\$]/', match: false)]
+    #[Assert\Regex(pattern: '/[<>#\\$]+/', match: false)]
     private ?string $typeAlimentation = null;
 
     #[ORM\ManyToOne(inversedBy: 'familleAnimals')]
