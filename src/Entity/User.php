@@ -107,12 +107,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 128)]
     #[Groups(['User_read', 'User_write'])]
-    #[Assert\Regex('/[a-zA-ZÀ-ù\s]/')]
+    #[Assert\Regex(pattern: '/[<>#\\$0-9]+/', match: false)]
     private ?string $nomUser = null;
 
     #[ORM\Column(length: 128)]
     #[Groups(['User_read', 'User_write'])]
-    #[Assert\Regex('/[A-zÀ-ù\s]/')]
+    #[Assert\Regex(pattern: '/[<>#\\$0-9]+/', match: false)]
     private ?string $pnomUser = null;
 
     #[ORM\Column(length: 30)]
