@@ -23,7 +23,7 @@ class Habitat
 
     #[ORM\Column(length: 128)]
     #[Groups(['get', 'Famille_read'])]
-    #[Assert\Regex('/[a-zA-ZÀ-ù0-9-\s]/')]
+    #[Assert\Regex(pattern: '/[<>#\\$]+/', match: false)]
     private ?string $libHabitat = null;
 
     #[ORM\OneToMany(mappedBy: 'habitat', targetEntity: AssoHabitatFamilleAnimal::class)]
