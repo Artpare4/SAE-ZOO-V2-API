@@ -22,8 +22,9 @@ class ZoneParcCrudController extends AbstractCrudController
             IdField::new('id')->hideOnForm(),
             TextField::new('libZone', 'Nom de la zone'),
             ImageField::new('imgZone', 'Image')
-                ->setUploadDir('public/image/zone_parc'),
-        ];
+                ->setUploadDir('public/image/zone_parc')
+                ->setUploadedFileNamePattern('./image/zone_parc/[slug].[extension]'),
+            ];
     }
 
 }
