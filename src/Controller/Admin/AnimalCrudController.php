@@ -23,7 +23,7 @@ class AnimalCrudController extends AbstractCrudController
     {
         return [
             IdField::new('id')->hideOnForm(),
-            TextField::new('nom', 'Nom'),
+            TextField::new('nomAnimal', 'Nom'),
             NumberField::new('taille', 'Taille'),
             NumberField::new('poids', 'Poids'),
             DateField::new('dateNaissance', 'Date de naissance'),
@@ -35,7 +35,7 @@ class AnimalCrudController extends AbstractCrudController
                     return isset($entity) ? $entity->getNomFamilleAnimal() : 'Pas de famille';
                 }),
             AssociationField::new('events')
-                ->setFormTypeOption('choice_label', 'nomEvent')
+                ->setFormTypeOption('choice_label', 'event.nomEvent')
                 ->setFormTypeOption('by_reference', false),
             ImageField::new('imgAnimal')
                 ->setUploadDir('public/image/animaux')
