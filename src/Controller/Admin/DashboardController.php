@@ -11,6 +11,7 @@ use App\Entity\FamilleAnimal;
 use App\Entity\Habitat;
 use App\Entity\User;
 use App\Entity\ZoneParc;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -45,6 +46,12 @@ class DashboardController extends AbstractDashboardController
     {
         return Dashboard::new()
             ->setTitle('Sae4 01 Api');
+    }
+
+    public function configureAssets(): Assets
+    {
+        return parent::configureAssets()
+            ->addCssFile('CSS/style_dashboard.css');
     }
 
     public function configureMenuItems(): iterable
