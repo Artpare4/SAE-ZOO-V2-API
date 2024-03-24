@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Event;
+use App\Entity\ZoneParc;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
@@ -27,20 +28,17 @@ class EventCrudController extends AbstractCrudController
             IntegerField::new('nbPlaces', 'Nombre de places'),
             TextEditorField::new('description', 'Description'),
             AssociationField::new('animaux')
-                ->setFormTypeOption('choice_label', 'nomAnimal')
+                ->setFormTypeOption('choice_label', 'animal.nomAnimal')
                 ->setFormTypeOption('by_reference', false),
             ImageField::new('imgEvent', 'Image')
-                ->setBasePath('images/events')
-                ->setUploadDir('public/images/events'),
+                ->setUploadDir('public/image/events')
+                ->setUploadedFileNamePattern('./image/events/[slug].[extension]'),
             AssociationField::new('datesEvent', 'Dates')
                 ->setFormTypeOption('choice_label', 'dateEvent')
                 ->setFormTypeOption('by_reference', false),
             AssociationField::new('zonesParc')
-                ->setFormTypeOption('choice_label', 'libZone')
-                ->formatValue(function ($entity) {
-                    return isset($entity) ? $entity->getLibZone() : 'Pas de zone';
-                }),
-
+                ->setFormTypeOption('choice_label', 'zoneParc.libZone')
+                ->setFormTypeOption('by_reference', false),
         ];
     }
 
