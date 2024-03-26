@@ -23,7 +23,7 @@ class Espece
 
     #[ORM\Column(length: 128)]
     #[Groups(['get', 'Famille_read'])]
-    #[Assert\Regex('/[a-zA-ZÀ-ù-]/')]
+    #[Assert\Regex(pattern: '/[<>#\\$]+/', match: false)]
     private ?string $libEspece = null;
 
     #[ORM\OneToMany(mappedBy: 'espece', targetEntity: FamilleAnimal::class)]

@@ -4,7 +4,6 @@ namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
-use ApiPlatform\Metadata\GetCollection;
 use App\Controller\GetImageAnimalController;
 use App\Repository\AnimalRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -44,7 +43,7 @@ class Animal
 
     #[ORM\Column(length: 128)]
     #[Groups(['Famille_read', 'Animal_read'])]
-    #[Assert\Regex('/[a-zA-ZÀ-ù-\s]/')]
+    #[Assert\Regex(pattern: '/[<>#\\$0-9]+/', match: false)]
     private ?string $nomAnimal = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
@@ -70,7 +69,6 @@ class Animal
     private ?FamilleAnimal $familleAnimal = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
-    #[Assert\Regex(match: false, pattern: '/[<>#\\$]/')]
     #[Groups(['Animal_read'])]
     private ?string $caracteristique = null;
 
