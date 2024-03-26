@@ -62,7 +62,6 @@ class Event
 
     #[ORM\Column(type: Types::TEXT)]
     #[Groups(['Event_read', 'Event_read_collection', 'ZoneParc_read_details'])]
-    //#[Assert\Regex(pattern: '/[<>#\\$]/', match: false)]
     private ?string $description = null;
 
     #[ORM\OneToMany(mappedBy: 'event', targetEntity: AssoEventDateEvent::class)]

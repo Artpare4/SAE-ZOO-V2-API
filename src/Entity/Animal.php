@@ -69,7 +69,6 @@ class Animal
     private ?FamilleAnimal $familleAnimal = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
-    //#[Assert\Regex(pattern: '/[<>#\\$]/', match: false)]
     #[Groups(['Animal_read'])]
     private ?string $caracteristique = null;
 
