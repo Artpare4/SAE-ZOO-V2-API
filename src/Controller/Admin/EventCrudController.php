@@ -9,6 +9,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
@@ -26,7 +27,8 @@ class EventCrudController extends AbstractCrudController
             IdField::new('id')->hideOnForm(),
             TextField::new('nomEvent', 'Nom de l\'événement'),
             IntegerField::new('nbPlaces', 'Nombre de places'),
-            TextEditorField::new('description', 'Description'),
+            TextareaField::new('description', 'Description')
+                ->stripTags(),
             AssociationField::new('animaux')
                 ->setFormTypeOption('choice_label', 'animal.nomAnimal')
                 ->setFormTypeOption('by_reference', false),

@@ -8,6 +8,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
@@ -26,7 +27,8 @@ class FamilleAnimalCrudController extends AbstractCrudController
             TextField::new('nomScientifique', 'Nom scientifique'),
             IntegerField::new('dangerExtinction', 'Indice extinction'),
             TextField::new('typeAlimentation', 'Alimentation'),
-            TextEditorField::new('description', 'Description'),
+            TextareaField::new('description', 'Description')
+                ->stripTags(),
             AssociationField::new('zoneParc')
                 ->setFormTypeOption('choice_label', 'libZone')
                 ->formatValue(function ($entity) {
