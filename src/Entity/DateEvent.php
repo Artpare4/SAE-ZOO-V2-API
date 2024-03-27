@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: DateEventRepository::class)]
-#[ApiResource(openapi: false)]
+#[ApiResource(openapi: false, security: false)]
 class DateEvent
 {
     #[ORM\Id]
