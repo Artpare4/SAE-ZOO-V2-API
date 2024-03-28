@@ -88,6 +88,7 @@ class FamilleAnimal
     private Collection $animals;
 
     #[ORM\ManyToOne(inversedBy: 'familleAnimals')]
+    #[ORM\JoinColumn(onDelete: 'SET NULL')]
     #[Groups(['Famille_read'])]
     private ?Espece $espece = null;
 
