@@ -66,6 +66,7 @@ class Animal
 
     #[ORM\ManyToOne(inversedBy: 'animals')]
     #[Groups(['Animal_read'])]
+    #[ORM\JoinColumn(onDelete: 'SET NULL')]
     private ?FamilleAnimal $familleAnimal = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
