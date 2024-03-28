@@ -94,6 +94,7 @@ class FamilleAnimal
 
     #[ORM\OneToMany(mappedBy: 'familleAnimal', targetEntity: AssoHabitatFamilleAnimal::class)]
     #[Groups(['Famille_read'])]
+    #[ORM\JoinColumn(onDelete: 'SET NULL')]
     private Collection $assoHabitatFamilleAnimals;
 
     #[ORM\Column(length: 255, nullable: true)]

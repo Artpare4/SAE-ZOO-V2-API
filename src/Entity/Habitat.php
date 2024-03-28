@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
-use ApiPlatform\Metadata\Get;
 use App\Repository\HabitatRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -26,7 +25,7 @@ class Habitat
     #[Assert\Regex(pattern: '/[<>#\\$]+/', match: false)]
     private ?string $libHabitat = null;
 
-    #[ORM\OneToMany(mappedBy: 'habitat', targetEntity: AssoHabitatFamilleAnimal::class)]
+    #[ORM\OneToMany(mappedBy: 'habitat', targetEntity: AssoHabitatFamilleAnimal::class, cascade: ['remove'])]
     private Collection $assoHabitatFamilleAnimals;
 
     public function __construct()
