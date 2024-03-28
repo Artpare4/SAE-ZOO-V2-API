@@ -81,6 +81,7 @@ class FamilleAnimal
 
     #[ORM\ManyToOne(inversedBy: 'familleAnimals')]
     #[Groups(['Famille_read'])]
+    #[ORM\JoinColumn(onDelete: 'SET NULL')]
     private ?ZoneParc $zoneParc = null;
 
     #[ORM\OneToMany(mappedBy: 'familleAnimal', targetEntity: Animal::class)]
