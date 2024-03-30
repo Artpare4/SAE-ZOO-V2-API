@@ -10,8 +10,8 @@ class GetImageAnimalController extends AbstractController
 {
     public function __invoke(Animal $animal): Response
     {
-        $image = file_get_contents($animal->getImgAnimal(), true);
-        $type = mime_content_type($animal->getImgAnimal());
+        $image = file_get_contents('./image/animaux/'.$animal->getImgAnimal(), true);
+        $type = mime_content_type('./image/animaux/'.$animal->getImgAnimal());
 
         return new Response(
             $image,
