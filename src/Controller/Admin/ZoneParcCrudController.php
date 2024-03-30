@@ -15,16 +15,14 @@ class ZoneParcCrudController extends AbstractCrudController
         return ZoneParc::class;
     }
 
-
     public function configureFields(string $pageName): iterable
     {
         return [
             IdField::new('id')->hideOnForm(),
             TextField::new('libZone', 'Nom de la zone'),
             ImageField::new('imgZone', 'Image')
-                ->setUploadDir('public/image/zone_parc')
-                ->setUploadedFileNamePattern('./image/zone_parc/[slug].[extension]'),
+                ->setBasePath('image/zone_parc')
+                ->setUploadDir('public/image/zone_parc'),
             ];
     }
-
 }
