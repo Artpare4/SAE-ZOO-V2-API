@@ -46,7 +46,7 @@ final class EventFactory extends ModelFactory
         $files = glob('public/image/events/*');
         $filesAndPathCorrect = [];
         foreach ($files as $file) {
-            $filesAndPathCorrect[] = './image/events/'.basename($file);
+            $filesAndPathCorrect[] = basename($file);
         }
         return [
             'description' => self::faker()->text(512),

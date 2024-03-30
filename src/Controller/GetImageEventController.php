@@ -10,8 +10,8 @@ class GetImageEventController extends AbstractController
 {
     public function __invoke(Event $event): Response
     {
-        $file = file_get_contents($event->getImgEvent(), true);
-        $type = mime_content_type($event->getImgEvent());
+        $file = file_get_contents('./image/events/'.$event->getImgEvent(), true);
+        $type = mime_content_type('./image/events/'.$event->getImgEvent());
 
         return new Response(
             $file,

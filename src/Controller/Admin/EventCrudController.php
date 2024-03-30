@@ -33,8 +33,8 @@ class EventCrudController extends AbstractCrudController
                 ->setFormTypeOption('choice_label', 'animal.nomAnimal')
                 ->setFormTypeOption('by_reference', false),
             ImageField::new('imgEvent', 'Image')
-                ->setUploadDir('public/image/events')
-                ->setUploadedFileNamePattern('./image/events/[slug].[extension]'),
+                ->setBasePath('image/events')
+                ->setUploadDir('public/image/events'),
             AssociationField::new('datesEvent', 'Dates')
                 ->setFormTypeOption('choice_label', 'dateEvent')
                 ->setFormTypeOption('by_reference', false),
