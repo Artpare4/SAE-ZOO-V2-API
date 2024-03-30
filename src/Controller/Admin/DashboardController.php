@@ -45,7 +45,7 @@ class DashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('Sae4 01 Api');
+            ->setTitle('<img src="image/LogoZoo.png" alt="icone acceuil">');
     }
 
     public function configureAssets(): Assets
