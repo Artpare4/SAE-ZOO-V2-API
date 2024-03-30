@@ -11,6 +11,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Form\Type\FileUploadType;
 
 class AnimalCrudController extends AbstractCrudController
 {
@@ -40,7 +41,10 @@ class AnimalCrudController extends AbstractCrudController
                 ->setFormTypeOption('by_reference', false),
             ImageField::new('imgAnimal')
                 ->setBasePath('image/animaux')
-                ->setUploadDir('public/image/animaux'),
+                ->setUploadDir('public/image/animaux')
+                ->setFormType(FileUploadType::class)
+                ->setFormTypeOption('allow_delete', false)
+                ->setFormTypeOption('upload_delete', function ($file) {}),
         ];
     }
 }

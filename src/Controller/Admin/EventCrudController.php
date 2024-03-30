@@ -12,6 +12,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Form\Type\FileUploadType;
 
 class EventCrudController extends AbstractCrudController
 {
@@ -34,7 +35,10 @@ class EventCrudController extends AbstractCrudController
                 ->setFormTypeOption('by_reference', false),
             ImageField::new('imgEvent', 'Image')
                 ->setBasePath('image/events')
-                ->setUploadDir('public/image/events'),
+                ->setUploadDir('public/image/events')
+                ->setFormType(FileUploadType::class)
+                ->setFormTypeOption('allow_delete', false)
+                ->setFormTypeOption('upload_delete', function ($file) {}),
             AssociationField::new('datesEvent', 'Dates')
                 ->setFormTypeOption('choice_label', 'dateEvent')
                 ->setFormTypeOption('by_reference', false),
