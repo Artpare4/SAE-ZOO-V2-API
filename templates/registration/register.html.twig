@@ -3,17 +3,94 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
-    <h1>Register</h1>
+    <div class="bg-background-100 h-[100%]">
+        <div class="flex justify-center items-center min-h-full w-[90%] lg:w-[50%]  mx-auto ">
+            <div style="background: linear-gradient(rgba(255,255,255,.4), rgba(255,255,255,.4)), url({{ asset('image/lion.png') }})" class="w-full p-12 rounded-3xl lg:rounded-2xl h-fit" >
+                <h1 class="text-center text-text-950 text-3xl md:text-5xl  lg:text-6xl lg:text-10xl mb-5">Inscription</h1>
+                {{ form_errors(registrationForm) }}
 
-    {{ form_errors(registrationForm) }}
+                {{ form_start(registrationForm) }}
+                <div class="flex flex-col">
+                    {{ form_label(registrationForm.nomUser,'Nom',
+                        {
+                            'label_attr':{
+                            'class':'text-text-950 text-xl md:text-2xl '
+                        }}) }}
+                    <div class="text-text-950" >
+                        {{ form_errors(registrationForm.nomUser) }}
+                    </div>
+                    {{ form_widget(registrationForm.nomUser,{
+                        'attr':{
+                            'class': 'text-lg text-secondary-50 p-3 bg-secondary-800/60 backdrop-filter backdrop-blur-sm border border-secondary-50 border-s rounded-2xl'
+                        }
+                    }) }}
+                </div>
+                <div class="flex flex-col mt-4">
+                    {{ form_label(registrationForm.pnomUser,'Prénom',
+                        {
+                            'label_attr':{
+                            'class':'text-text-950 text-xl md:text-2xl  '
+                        }}) }}
+                    <div class="text-text-950" >
+                        {{ form_errors(registrationForm.pnomUser) }}
+                    </div>
+                    {{ form_widget(registrationForm.pnomUser,{
+                        'attr':{
+                            'class': 'text-lg text-secondary-50  p-3 bg-secondary-800/60 backdrop-filter backdrop-blur-sm border border-secondary-50 border-s rounded-2xl'
+                        }
+                    })}}
+                </div>
+                <div class="flex flex-col mt-4">
+                    {{ form_label(registrationForm.email,'Email',
+                        {
+                            'label_attr':{
+                            'class':'text-text-950   text-xl md:text-2xl '
+                        }}) }}
+                    <div class="text-text-950" >
+                        {{ form_errors(registrationForm.email) }}
+                    </div>
+                    {{ form_widget(registrationForm.email,{
+                        'attr':{
+                            'class': 'text-lg  text-secondary-50  p-3 bg-secondary-800/60 backdrop-filter backdrop-blur-sm border border-secondary-50 border-s rounded-2xl'
+                        }
+                    })}}
+                </div>
+                <div class="flex flex-col mt-4">
+                    {{ form_label(registrationForm.phoneUser,'Numéro de téléphone',
+                        {
+                            'label_attr':{
+                            'class':'text-text-950 text-xl md:text-2xl'
+                        }}) }}
+                    <div class="text-text-950">
+                        {{ form_errors(registrationForm.phoneUser) }}
+                    </div>
+                    {{ form_widget(registrationForm.phoneUser,{
+                        'attr':{
+                            'class': 'text-lg text-secondary-50  p-3 bg-secondary-800/60 backdrop-filter backdrop-blur-sm border border-secondary-50 border-s rounded-2xl'
+                        }
+                    })}}
+                </div>
+                <div class="flex flex-col mt-4">
+                    {{ form_label(registrationForm.plainPassword,'Mot de passe',
+                        {
+                            'label_attr':{
+                            'class':'text-text-950 text-xl md:text-2xl  '
+                        }}) }}
+                    <div class="text-text-950">
+                        {{ form_errors(registrationForm.plainPassword) }}
+                    </div>
+                    {{ form_widget(registrationForm.plainPassword,{
+                        'attr':{
+                            'class': 'text-lg text-secondary-50  p-3 bg-secondary-800/60 backdrop-filter backdrop-blur-sm border border-secondary-50 border-s rounded-2xl'
+                        }
+                    })}}
+                </div>
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
-
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+                <div class="flex justify-center mt-4">
+                    <button type="submit" class="btn bg-primary-500/70 col-start-2 col-end-4 text-4xl lg:text-2xl rounded-xl p-2 border border-primary-50 border-s">Register</button>
+                </div>
+                {{ form_end(registrationForm) }}
+            </div>
+        </div>
+    </div>
 {% endblock %}
