@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: AssoEventZoneParcRepository::class)]
-#[ApiResource(openapi: false, security: false)]
+#[ApiResource(openapi: false, security: "false")]
 class AssoEventZoneParc
 {
     #[ORM\Id]
