@@ -81,6 +81,7 @@ class FamilleAnimal
 
     #[ORM\ManyToOne(inversedBy: 'familleAnimals')]
     #[Groups(['Famille_read'])]
+    #[ORM\JoinColumn(onDelete: 'SET NULL')]
     private ?ZoneParc $zoneParc = null;
 
     #[ORM\OneToMany(mappedBy: 'familleAnimal', targetEntity: Animal::class)]
@@ -88,11 +89,13 @@ class FamilleAnimal
     private Collection $animals;
 
     #[ORM\ManyToOne(inversedBy: 'familleAnimals')]
+    #[ORM\JoinColumn(onDelete: 'SET NULL')]
     #[Groups(['Famille_read'])]
     private ?Espece $espece = null;
 
     #[ORM\OneToMany(mappedBy: 'familleAnimal', targetEntity: AssoHabitatFamilleAnimal::class)]
     #[Groups(['Famille_read'])]
+    #[ORM\JoinColumn(onDelete: 'SET NULL')]
     private Collection $assoHabitatFamilleAnimals;
 
     #[ORM\Column(length: 255, nullable: true)]

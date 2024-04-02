@@ -51,7 +51,7 @@ final class FamilleAnimalFactory extends ModelFactory
         $files = glob('public/image/famille_animal/*');
         $filesAndPathCorrect = [];
         foreach ($files as $file) {
-            $filesAndPathCorrect[] = './image/famille_animal/'.basename($file);
+            $filesAndPathCorrect[] = basename($file);
         }
 
         return [

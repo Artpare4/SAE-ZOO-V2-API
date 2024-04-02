@@ -25,7 +25,7 @@ class Habitat
     #[Assert\Regex(pattern: '/[<>#\\$]+/', match: false)]
     private ?string $libHabitat = null;
 
-    #[ORM\OneToMany(mappedBy: 'habitat', targetEntity: AssoHabitatFamilleAnimal::class)]
+    #[ORM\OneToMany(mappedBy: 'habitat', targetEntity: AssoHabitatFamilleAnimal::class, cascade: ['remove'])]
     private Collection $assoHabitatFamilleAnimals;
 
     public function __construct()

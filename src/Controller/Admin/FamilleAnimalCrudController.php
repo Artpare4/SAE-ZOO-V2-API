@@ -8,8 +8,10 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Form\Type\FileUploadType;
 
 class FamilleAnimalCrudController extends AbstractCrudController
 {
@@ -26,7 +28,8 @@ class FamilleAnimalCrudController extends AbstractCrudController
             TextField::new('nomScientifique', 'Nom scientifique'),
             IntegerField::new('dangerExtinction', 'Indice extinction'),
             TextField::new('typeAlimentation', 'Alimentation'),
-            TextEditorField::new('description', 'Description'),
+            TextareaField::new('description', 'Description')
+                ->stripTags(),
             AssociationField::new('zoneParc')
                 ->setFormTypeOption('choice_label', 'libZone')
                 ->formatValue(function ($entity) {
@@ -36,8 +39,11 @@ class FamilleAnimalCrudController extends AbstractCrudController
                 ->setFormTypeOption('choice_label', 'nomAnimal')
                 ->setFormTypeOption('by_reference', false),
             ImageField::new('imgFamille', 'Image')
+                ->setBasePath('image/famille_animal')
                 ->setUploadDir('public/image/famille_animal')
-                ->setUploadedFileNamePattern('./image/famille_animal/[slug].[extension]'),
+                ->setFormType(FileUploadType::class)
+                ->setFormTypeOption('allow_delete', false)
+                ->setFormTypeOption('upload_delete', function ($file) {}),
             AssociationField::new('espece', 'Espèce')
                 ->setFormTypeOption('choice_label', 'libEspece')
                 ->formatValue(function ($entity) {

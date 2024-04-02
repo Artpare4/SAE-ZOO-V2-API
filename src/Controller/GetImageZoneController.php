@@ -10,8 +10,8 @@ class GetImageZoneController extends AbstractController
 {
     public function __invoke(ZoneParc $parc): Response
     {
-        $file = file_get_contents($parc->getImgZone(), true);
-        $type = mime_content_type($parc->getImgZone());
+        $file = file_get_contents('./image/zone_parc/'.$parc->getImgZone(), true);
+        $type = mime_content_type('./image/zone_parc/'.$parc->getImgZone());
 
         return new Response(
             $file,

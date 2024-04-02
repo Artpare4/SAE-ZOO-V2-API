@@ -49,7 +49,7 @@ final class AnimalFactory extends ModelFactory
         $files = glob('public/image/animaux/*');
         $filesAndPathCorrect = [];
         foreach ($files as $file) {
-            $filesAndPathCorrect[] = './image/animaux/'.basename($file);
+            $filesAndPathCorrect[] = basename($file);
         }
         $result = [
             'caracteristique' => self::faker()->text(128),

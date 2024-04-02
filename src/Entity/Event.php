@@ -66,6 +66,7 @@ class Event
 
     #[ORM\OneToMany(mappedBy: 'event', targetEntity: AssoEventDateEvent::class)]
     #[Groups(['Event_read'])]
+    #[ORM\JoinColumn(onDelete: 'SET NULL')]
     private Collection $datesEvent;
 
     #[ORM\OneToMany(mappedBy: 'event', targetEntity: AssoEventReservation::class)]

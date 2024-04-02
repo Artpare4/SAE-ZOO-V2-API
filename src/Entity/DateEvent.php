@@ -24,7 +24,7 @@ class DateEvent
     #[Groups(['Event_read'])]
     private ?\DateTimeInterface $dateEvent = null;
 
-    #[ORM\OneToMany(mappedBy: 'dateEvent', targetEntity: AssoEventDateEvent::class)]
+    #[ORM\OneToMany(mappedBy: 'dateEvent', targetEntity: AssoEventDateEvent::class, cascade: ['remove'])]
     private Collection $events;
 
     public function __construct()
