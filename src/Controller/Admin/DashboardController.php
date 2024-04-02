@@ -57,18 +57,25 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToUrl('Home', 'fa fa-home', '/api');
+
         yield MenuItem::section('Animal');
-        yield MenuItem::linkToCrud('Famille d\'animaux', 'fas fa-hippo', FamilleAnimal::class);
         yield MenuItem::linkToCrud('Animaux', 'fas fa-fish', Animal::class);
-        yield MenuItem::linkToCrud('User', 'fa-solid fa-user', User::class);
-        yield MenuItem::linkToCrud('Billet', 'fa-solid fa-ticket', Billet::class);
-        yield MenuItem::linkToCrud('Zone Parc', 'fas fa-tree', ZoneParc::class);
+        yield MenuItem::linkToCrud('Espèce', 'fa-solid fa-worm', Espece::class);
+        yield MenuItem::linkToCrud('Famille d\'animaux', 'fas fa-hippo', FamilleAnimal::class);
+        yield MenuItem::linkToCrud('Habitat', 'fas fa-mountain-sun', Habitat::class);
+
+        yield MenuItem::section('Evènements');
+        yield MenuItem::linkToCrud('Date Evenement', 'fas fa-calendar-days', DateEvent::class);
         yield MenuItem::linkToCrud('Evenement', 'fas fa-users', Event::class);
 
-        yield MenuItem::section('non API');
-        yield MenuItem::linkToCrud('Date Evenement', 'fas fa-calendar-days', DateEvent::class);
-        yield MenuItem::linkToCrud('Habitat', 'fas fa-mountain-sun', Habitat::class);
-        yield MenuItem::linkToCrud('Espèce', 'fa-solid fa-worm', Espece::class);
+
+        yield MenuItem::section('Parc');
+        yield MenuItem::linkToCrud('Zone Parc', 'fas fa-tree', ZoneParc::class);
+
+        yield MenuItem::section('Utilisateurs');
+        yield MenuItem::linkToCrud('Billet', 'fa-solid fa-ticket', Billet::class);
+        yield MenuItem::linkToCrud('User', 'fa-solid fa-user', User::class);
+
 
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }
