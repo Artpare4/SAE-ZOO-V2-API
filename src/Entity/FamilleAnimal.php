@@ -93,7 +93,7 @@ class FamilleAnimal
     #[Groups(['Famille_read'])]
     private ?Espece $espece = null;
 
-    #[ORM\OneToMany(mappedBy: 'familleAnimal', targetEntity: AssoHabitatFamilleAnimal::class)]
+    #[ORM\OneToMany(mappedBy: 'familleAnimal', targetEntity: AssoHabitatFamilleAnimal::class, cascade: ['remove'])]
     #[Groups(['Famille_read'])]
     #[ORM\JoinColumn(onDelete: 'SET NULL')]
     private Collection $assoHabitatFamilleAnimals;
