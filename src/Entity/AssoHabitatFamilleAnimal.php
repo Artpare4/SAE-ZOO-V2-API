@@ -11,7 +11,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 #[ORM\Entity(repositoryClass: AssoHabitatFamilleAnimalRepository::class)]
 #[ApiResource(operations: [
     new Get(normalizationContext: ['groups' => ['get']], openapi: false),
-],openapi: false)]
+],openapi: false, security: "false")]
 class AssoHabitatFamilleAnimal
 {
     #[ORM\Id]

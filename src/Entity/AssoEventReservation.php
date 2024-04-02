@@ -7,7 +7,7 @@ use App\Repository\AssoEventReservationRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: AssoEventReservationRepository::class)]
-#[ApiResource(openapi: false)]
+#[ApiResource(openapi: false, security: "false")]
 class AssoEventReservation
 {
     #[ORM\Id]
