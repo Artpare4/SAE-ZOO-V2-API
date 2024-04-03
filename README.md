@@ -5,9 +5,9 @@
 ![Static Badge](https://img.shields.io/badge/Symfony-6.3-blue)
 ![Static Badge](https://img.shields.io/badge/Status-In_progress-gold)
 
-Ce projet est le côté back-end/API d'un site de gestion pour un zoo. Il permet de gérer les animaux, les enclos et les évènements. Les visiteurs peuvent réserver leurs places à des évènements.
+Ce projet est le côté back-end/API d'un site de gestion pour un zoo. Il permet de gérer les animaux, les enclos et les événements. Les visiteurs peuvent réserver leurs places pour des événements.
 
-Ce projet est en liens avec le projet [SAE4-01-front] s'occupant de la partie front-end, le visuel du site.
+Ce projet est en lien avec le projet [SAE4-01-front] qui s'occupe de la partie front-end, le visuel du site.
 ## Auteurs
 
 - DAUNAT Romain: daun0005
@@ -20,10 +20,10 @@ Ce projet est en liens avec le projet [SAE4-01-front] s'occupant de la partie fr
 
 ### Installation
 
-1. Cloner le projet
-2. Installer les dépendances Composer avec `composer install`
-3. Installer les dépendances JavaScript avec `npm install`
-4. Installation du build de tailwindCSS avec `npm run build`
+1. Clonez le projet
+2. Installez les dépendances Composer avec `composer install`
+3. Installez les dépendances JavaScript avec `npm install`
+4. Installez le build de tailwindCSS avec `npm run build`
 
 ### Configuration
 
@@ -70,12 +70,13 @@ composer fix:cs
 ```bash
 composer start
 ```
-la base de donnée ne peut pas être accédé hors des serveurs de L'IUT.
-pour utilisé l'api, s'assuré d'être connécté au VPN de l'IUT.
 
-L'API est accessible à l'adresse `http://localhost:8000/api`
+La base de données ne peut pas être accédée hors des serveurs de l'IUT. 
+Pour utiliser l'API, assurez-vous d'être connecté au VPN de l'IUT.
+
+L'API est accessible à l'adresse : [http://localhost:8000/api](http://localhost:8000/api)
 
 #### Tests
 
-les tests sont utilisable depuis la commande `composer test`
+les tests sont utilisables depuis la commande `composer test`
 ou `composer test:codecept` pour les tests unitaires codeception
