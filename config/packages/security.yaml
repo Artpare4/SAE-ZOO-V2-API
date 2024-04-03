@@ -35,6 +35,8 @@ security:
         - { path: ^/api/me, roles: IS_AUTHENTICATED_FULLY }
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/admin, roles: ROLE_ADMIN }
+
 
 when@test:
     security:
