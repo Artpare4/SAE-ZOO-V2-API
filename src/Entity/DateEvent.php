@@ -25,6 +25,7 @@ class DateEvent
     private ?\DateTimeInterface $dateEvent = null;
 
     #[ORM\OneToMany(mappedBy: 'dateEvent', targetEntity: AssoEventDateEvent::class, cascade: ['remove'])]
+    #[ORM\JoinColumn(onDelete: 'SET NULL')]
     private Collection $events;
 
     public function __construct()
