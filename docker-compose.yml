@@ -1,0 +1,40 @@
+version: '3.4'
+
+services:
+  db:
+    image: mariadb:10.2.25
+    restart: always
+    environment:
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: secretR00tPassw0rd
+      MYSQL_DATABASE: bd
+  
+  php:
+    build:
+      context: ./
+      target: api_php
+    depends_on:
+      - db
+    volumes:
+      - ./:/srv/contacts
+      - ./docker/php/conf.d/dev.ini:/usr/local/etc/php/conf.d/config.ini
+
+  web:
+    build:
+      context: ./
+      target: api_nginx
+    depends_on:
+      - php
+    volumes: 
+      - ./public:/srv/contacts/public:ro
+    ports:
+      - "8000:80"
+  
+  phpmyadmin:
+    image: phpmyadmin
+    restart: always
+    ports:
+      - 8085:80
+    depends_on:
+      - db
