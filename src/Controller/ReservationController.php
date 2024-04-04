@@ -20,7 +20,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ReservationController extends AbstractController
 {
-
     /**
      * Application du controller de Reservation.
      *
@@ -45,9 +44,6 @@ class ReservationController extends AbstractController
      * d'un formulaire ayant pour objectif de demander à l'utilisateur les modalités de sa reservation.
      *
      * @param Billet $billet
-     * @param EntityManagerInterface $entityManager
-     * @param Request $request
-     * @return Response
      */
     #[Route('/reservation/create/{id}', name: 'app_reservation_create')]
     public function create(#[MapEntity] Billet $billet, EntityManagerInterface $entityManager, Request $request): Response
@@ -133,7 +129,7 @@ class ReservationController extends AbstractController
                 }
             }
 
-            return $this->redirect($this->getParameter('app.front_url'));
+            return $this->redirect($this->getParameter('app.front_url').'/user');
         }
 
         return $this->render('reservation/event.html.twig', [
@@ -149,8 +145,6 @@ class ReservationController extends AbstractController
      * est connecté est possède un accès à cette réservation
      *
      * @param Reservation $reservation
-     *
-     * @return Response
      */
     #[Route('/reservation/delete/{id}', name: 'app_reservation_delete')]
     public function delete(#[MapEntity] Reservation $reservation, EntityManagerInterface $entityManager, Request $request): Response
@@ -177,7 +171,7 @@ class ReservationController extends AbstractController
                 $entityManager->flush();
             }
 
-            return $this->redirectToRoute('app_user');
+            return $this->redirect($this->getParameter('app.front_url').'/user');
         }
 
         return $this->render('reservation/delete.html.twig', [
