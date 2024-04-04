@@ -133,7 +133,7 @@ class ReservationController extends AbstractController
                 }
             }
 
-            return $this->redirectToRoute('app_user');
+            return $this->redirect($this->getParameter('app.front_url'));
         }
 
         return $this->render('reservation/event.html.twig', [
