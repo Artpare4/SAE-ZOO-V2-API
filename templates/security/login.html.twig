@@ -45,6 +45,9 @@
                         <div class="flex justify-center mt-4">
                             <button type="submit" class="btn bg-primary-500/70 col-start-2 col-end-4 text-4xl lg:text-2xl rounded-xl p-2 border border-primary-50 border-s">Connexion</button>
                         </div>
+                        <div class="mt-3 flex justify-center">
+                            <a class="text-text-50 bg-secondary-800/60 backdrop-filter backdrop-blur-sm border border-secondary-50 border-s p-2 rounded-2xl text-xl" href="{{ path('app_register',{'redirect':app.request.get('redirect')}) }}">Créez votre compte ! </a>
+                        </div>
                     {% endif %}
                 </form>
             </div>
