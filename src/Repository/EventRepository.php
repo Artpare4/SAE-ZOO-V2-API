@@ -21,6 +21,33 @@ class EventRepository extends ServiceEntityRepository
         parent::__construct($registry, Event::class);
     }
 
+    /**
+     * Méthode de la classe EventRepository.
+     * Retourne une liste d'event entre une date entrée en paramètre et la date présente après le nombre de jours entré
+     * en paramètre.
+     *
+     * @param \DateTime $date    date de départ
+     * @param int       $nbJours nombre de jours séparant cette date et la prochaine
+     *
+     * @return Event[] la liste d'évènement entre ces deux jours
+     */
+    public function findFromDateToN(\DateTime $date, int $nbJours): array
+    {
+        --$nbJours;
+
+        $request = $this->createQueryBuilder('event')
+            ->innerJoin('App:AssoEventDateEvent', 'aed', 'WITH', 'event = aed.event')
+            ->innerJoin('App:DateEvent', 'de', 'WITH', 'aed.dateEvent = de')
+            ->where("de.dateEvent BETWEEN :date AND DATE_ADD(:date,:jours, 'day')")
+            ->setParameter('date', $date->format('Y-m-d'))
+            ->setParameter('jours', $nbJours);
+        $query = $request->getQuery()->execute();
+
+        return array_filter($query, function ($item) {
+            return $item instanceof Event;
+        });
+    }
+
 //    /**
 //     * @return Event[] Returns an array of Event objects
 //     */
