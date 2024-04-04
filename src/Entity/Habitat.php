@@ -26,6 +26,7 @@ class Habitat
     private ?string $libHabitat = null;
 
     #[ORM\OneToMany(mappedBy: 'habitat', targetEntity: AssoHabitatFamilleAnimal::class, cascade: ['remove'])]
+    #[ORM\JoinColumn(onDelete: 'SET NULL')]
     private Collection $assoHabitatFamilleAnimals;
 
     public function __construct()
