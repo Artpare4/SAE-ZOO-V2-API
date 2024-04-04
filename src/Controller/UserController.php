@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Form\RegistrationFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -25,7 +26,9 @@ class UserController extends AbstractController
             $user = $form->getData();
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_user');
+            if ($redirect = $request->get('redirect')) {
+                return new RedirectResponse($redirect);
+            }
         }
         return $this->render('user/update.html.twig', [
             'controller_name' => 'UserController',
