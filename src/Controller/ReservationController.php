@@ -14,6 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Finder\Exception\AccessDeniedException;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -30,7 +31,7 @@ class ReservationController extends AbstractController
     public function choose(BilletRepository $billetRepository): Response
     {
         if (!$this->isGranted('ROLE_USER')) {
-            return $this->redirectToRoute('app_login');
+            return $this->redirect($this->generateUrl('app_login').'?redirect='.urlencode('/reservation/create'));
         }
         $billets = $billetRepository->findAll();
 
@@ -49,7 +50,7 @@ class ReservationController extends AbstractController
     public function create(#[MapEntity] Billet $billet, EntityManagerInterface $entityManager, Request $request): Response
     {
         if (!$this->isGranted('ROLE_USER')) {
-            return $this->redirectToRoute('app_login');
+            return $this->redirect($this->generateUrl('app_login').'?redirect='.urlencode('/reservation/create'));
         }
 
         $user = $this->getUser();
