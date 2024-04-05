@@ -79,3 +79,13 @@ L'API est accessible à l'adresse `http://localhost:8000/api`
 
 les tests sont utilisable depuis la commande `composer test`
 ou `composer test:codecept` pour les tests unitaires codeception
+
+### Docker
+
+#### Dev
+
+Afin de lancer en docker de développement, il suffit d'utiliser la commande suivante dans le dossier racine :
+
+```bash
+docker-compose up
+```
