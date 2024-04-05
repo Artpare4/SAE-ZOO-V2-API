@@ -93,9 +93,44 @@ L'API est accessible à l'adresse : [http://localhost:8000/api](http://localhost
 
 #### Tests
 
-les tests sont utilisables depuis la commande `composer test`
+les tests sont utilisable depuis la commande `composer test`
 ou `composer test:codecept` pour les tests unitaires codeception
 
+### Docker
+
+#### Dev
+
+Afin de lancer en docker de développement, il suffit d'utiliser les commandes suivantes dans le dossier racine :
+
+```bash
+npm run dev
+```
+
+```bash
+docker-compose up
+```
+
+#### Production
+
+Afin de lancer en docker de production, il faut tout d'abord générer les deux images nécessaires.
+
+```bash
+npm run build
+```
+
+```bash
+docker build --tag aenrr/api-zoo --target api_php_prod .
+```
+
+```bash
+docker build --tag aenrr/api-web --target api_nginx_prod .
+```
+
+Puis lancer dans le répertoire production :
+
+```bash
+docker-compose up
+```
 
 ### Users
 
