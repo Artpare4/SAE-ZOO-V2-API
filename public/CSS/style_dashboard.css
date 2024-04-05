@@ -8,9 +8,9 @@ input[type="search"]::after{
 i.fa-gear{
     color: #00663C;
 }
-i.fa-home::before,i.fa-user::before,i.fa-spider::before,
+i.fa-spider::before,i.fa-user::before,i.fa-ticket::before,
 i.fa-tree::before,i.fa-users::before,i.fa-calendar-days::before,
-i.fa-hippo::before,i.fa-fish::before,i.fa-worm::before,i.fa-ticket::before,i.fa-mountain-sun::before{
+i.fa-hippo::before,i.fa-fish::before,i.fa-worm::before,i.fa-mountain-sun::before{
     color: #ffbb00;
 }
 span.menu-item-label{
