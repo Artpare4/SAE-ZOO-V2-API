@@ -84,8 +84,28 @@ ou `composer test:codecept` pour les tests unitaires codeception
 
 #### Dev
 
-Afin de lancer en docker de développement, il suffit d'utiliser la commande suivante dans le dossier racine :
+Afin de lancer en docker de développement, il suffit d'utiliser les commandes suivantes dans le dossier racine :
+
+```bash
+npm run dev
+```
 
 ```bash
 docker-compose up
+```
+
+#### Production
+
+Afin de lancer en docker de production, il faut tout d'abord générer les deux images nécessaires.
+
+```bash
+npm run build
+```
+
+```bash
+docker build --tag aenrr/api-zoo --target api_php_prod .
+```
+
+```bash
+docker build --tag aenrr/api-web --target api_nginx_prod .
 ```
