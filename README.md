@@ -115,3 +115,5 @@ Puis lancer dans le répertoire production :
 ```bash
 docker-compose up
 ```
+
+Le projet est déja servi sur l'adresse http://10.31.33.119:8000 sur le réseau de l'IUT.
