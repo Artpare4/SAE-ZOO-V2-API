@@ -109,3 +109,9 @@ docker build --tag aenrr/api-zoo --target api_php_prod .
 ```bash
 docker build --tag aenrr/api-web --target api_nginx_prod .
 ```
+
+Puis lancer dans le répertoire production :
+
+```bash
+docker-compose up
+```
