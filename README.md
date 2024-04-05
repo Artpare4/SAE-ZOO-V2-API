@@ -16,7 +16,14 @@ Ce projet est en lien avec le projet [SAE4-01-front] qui s'occupe de la partie f
 - MONNEY Romain: monn0042
 - PARENT Arthur: pare0028
 
+
+## Partie Front-end
+La partie back-end du projet se trouve à l'adresse : https://iut-info.univ-reims.fr/gitlab/pare0028/sae4-01-front
+
 ## Installation / Configuration
+
+### Indication pré-installation
+Nous vous conseillons donc d'importer ce projet sur une machine avec un OS de type **Unix** (Mac, linux,...), en effet nous constatons qu'il y a des possibilités d'erreurs lors du lancement du projet sur des machines ayant un OS Windows. 
 
 ### Installation
 
@@ -38,6 +45,11 @@ Script de lancement du serveur :
 
 ```bash
 composer start
+```
+Script de génération/regénération de la base de donnée:
+
+```bash
+composer db 
 ```
 
 Script de lancement de tous les tests:
@@ -71,6 +83,9 @@ composer fix:cs
 composer start
 ```
 
+```bash
+npm run watch
+```
 La base de données ne peut pas être accédée hors des serveurs de l'IUT. 
 Pour utiliser l'API, assurez-vous d'être connecté au VPN de l'IUT.
 
@@ -80,3 +95,24 @@ L'API est accessible à l'adresse : [http://localhost:8000/api](http://localhost
 
 les tests sont utilisables depuis la commande `composer test`
 ou `composer test:codecept` pour les tests unitaires codeception
+
+
+### Users
+
+#### Louise
+- nom de famille: Parent
+- email: louise@example.com
+- password: password
+
+#### Wilfried
+- nom de famille: Noel
+- email: Wil@example.com
+- password: test
+
+
+## Adresse du site web déployé
+Nous vous conseillons d'utiliser le navigateur web Firefox pour pouvoir profiter de notre système d'authentification
+
+Lien site web: http://10.31.33.119:8085/
+
+Lien api: http://10.31.33.119:8000/api
