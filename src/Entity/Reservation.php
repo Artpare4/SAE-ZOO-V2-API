@@ -86,6 +86,7 @@ class Reservation
 
     #[ORM\OneToMany(mappedBy: 'reservation', targetEntity: AssoEventReservation::class, cascade: ['remove'], orphanRemoval: true)]
     #[Groups(['Reservation-billet_read'])]
+    #[ORM\JoinColumn(onDelete: 'SET NULL')]
     private Collection $events;
 
     public function __construct()

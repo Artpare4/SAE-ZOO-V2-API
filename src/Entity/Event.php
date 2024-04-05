@@ -64,12 +64,12 @@ class Event
     #[Groups(['Event_read', 'Event_read_collection', 'ZoneParc_read_details'])]
     private ?string $description = null;
 
-    #[ORM\OneToMany(mappedBy: 'event', targetEntity: AssoEventDateEvent::class)]
+    #[ORM\OneToMany(mappedBy: 'event', targetEntity: AssoEventDateEvent::class,cascade: ['remove'])]
     #[Groups(['Event_read'])]
     #[ORM\JoinColumn(onDelete: 'SET NULL')]
     private Collection $datesEvent;
 
-    #[ORM\OneToMany(mappedBy: 'event', targetEntity: AssoEventReservation::class)]
+    #[ORM\OneToMany(mappedBy: 'event', targetEntity: AssoEventReservation::class, cascade: ['remove'])]
     #[Groups(['Event_read'])]
     private Collection $reservation;
 
