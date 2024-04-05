@@ -77,7 +77,7 @@ FROM api_php as api_php_prod
 
 ARG APP_ENV=prod
 
-COPY composer.json composer.lock symfony.lock /srv/contacts
+COPY composer.json composer.lock symfony.lock /srv/contacts/
 
 RUN set -eux; \
     composer install --prefer-dist --no-dev --no-scripts --no-progress; \
